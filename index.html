@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Фишинг.NET - Астрахань 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -40,21 +40,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             padding: 10px;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(103, 58, 183, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(247, 37, 133, 0.1) 0%, transparent 50%);
-            z-index: -1;
         }
 
         .container {
@@ -174,7 +159,6 @@
             font-size: 0.95rem;
             flex: 1;
             min-height: 60px;
-            touch-action: manipulation;
             text-align: center;
         }
 
@@ -233,7 +217,6 @@
             font-size: 1rem;
             width: 100%;
             min-height: 60px;
-            touch-action: manipulation;
         }
 
         @media (min-width: 576px) {
@@ -349,11 +332,6 @@
             transition: all 0.3s;
         }
 
-        .theory-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
         .theory-card h3 {
             font-size: 1.3rem;
             margin-bottom: 15px;
@@ -466,16 +444,6 @@
             overflow: hidden;
         }
 
-        .game-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        }
-
         .game-header {
             text-align: center;
             margin-bottom: 20px;
@@ -544,7 +512,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             max-height: 300px;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         .email-header {
@@ -597,7 +564,6 @@
             gap: 10px;
             width: 100%;
             min-height: 60px;
-            touch-action: manipulation;
         }
 
         @media (min-width: 400px) {
@@ -669,12 +635,6 @@
             gap: 10px;
         }
 
-        @media (min-width: 576px) {
-            .options-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
         .quiz-option {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid transparent;
@@ -688,7 +648,6 @@
             min-height: 60px;
             display: flex;
             align-items: center;
-            touch-action: manipulation;
         }
 
         .quiz-option:active {
@@ -727,23 +686,16 @@
             min-height: 50px;
             flex: 1;
             min-width: 120px;
-            touch-action: manipulation;
         }
 
         .nav-btn:active {
             transform: scale(0.98);
         }
 
-        .nav-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
         .nav-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none !important;
+            transform: none;
         }
 
         /* СЕРТИФИКАТ */
@@ -766,16 +718,6 @@
             max-width: 600px;
             position: relative;
             overflow: hidden;
-        }
-
-        .certificate::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%234361ee" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f72585" stroke-width="1"/></svg>');
         }
 
         .certificate-header {
@@ -893,11 +835,6 @@
             transition: all 0.3s;
         }
 
-        .cert-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
         /* ПРИМЕРЫ */
         .examples-grid {
             display: flex;
@@ -983,7 +920,6 @@
             font-size: 1.2rem;
             transition: all 0.3s;
             text-decoration: none;
-            touch-action: manipulation;
         }
 
         .social-icon:active {
@@ -1022,7 +958,6 @@
             font-size: 0.95rem;
             line-height: 1.4;
             animation: fadeIn 0.5s;
-            -webkit-overflow-scrolling: touch;
             max-height: 200px;
             overflow-y: auto;
         }
@@ -1066,7 +1001,7 @@
             border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
-        /* МЕДИА-ЗАПРОСЫ ДЛЯ ТЕЛЕФОНОВ */
+        /* МОБИЛЬНАЯ ОПТИМИЗАЦИЯ */
         @media (max-width: 575px) {
             html {
                 font-size: 15px;
@@ -1074,21 +1009,18 @@
             
             body {
                 padding: 8px;
-                -webkit-text-size-adjust: none;
             }
             
             .container {
                 padding: 0 10px;
             }
             
-            /* Уменьшаем отступы в карточках */
             .section-card {
                 padding: 20px 15px;
                 margin-bottom: 15px;
                 border-radius: 16px;
             }
             
-            /* Заголовки */
             h1 {
                 font-size: 1.8rem;
                 padding: 0 5px;
@@ -1107,7 +1039,6 @@
                 font-size: 1.1rem;
             }
             
-            /* Логотип */
             .logo-icon {
                 font-size: 2.5rem;
             }
@@ -1117,7 +1048,6 @@
                 padding: 0 5px;
             }
             
-            /* Классы и навигация */
             .grade-tab, .nav-tab {
                 min-height: 55px;
                 padding: 12px;
@@ -1131,7 +1061,6 @@
                 margin-top: 3px;
             }
             
-            /* Теория */
             .theory-card {
                 padding: 20px;
             }
@@ -1140,7 +1069,6 @@
                 font-size: 1.2rem;
             }
             
-            /* Игра */
             .game-container {
                 padding: 20px 15px;
                 margin: 20px 0;
@@ -1189,7 +1117,6 @@
                 min-height: 55px;
             }
             
-            /* Тест */
             .quiz-container {
                 padding: 20px 15px;
             }
@@ -1224,7 +1151,6 @@
                 order: -1;
             }
             
-            /* Сертификат */
             .certificate {
                 padding: 20px 15px;
             }
@@ -1265,7 +1191,6 @@
                 justify-content: center;
             }
             
-            /* Примеры */
             .example-header {
                 padding: 15px;
                 font-size: 1rem;
@@ -1276,7 +1201,6 @@
                 padding: 15px;
             }
             
-            /* Футер */
             footer {
                 margin-top: 30px;
                 padding: 20px 0;
@@ -1291,44 +1215,6 @@
             }
         }
 
-        /* Улучшение тач-интерфейса */
-        @media (hover: none) and (pointer: coarse) {
-            /* Увеличиваем зону клика для всех интерактивных элементов */
-            .grade-tab, 
-            .nav-tab, 
-            .game-btn, 
-            .nav-btn, 
-            .cert-btn,
-            .quiz-option,
-            .rule-card,
-            .example-card,
-            .social-icon {
-                min-height: 44px; /* Минимальный размер для удобного тапа */
-            }
-            
-            /* Увеличиваем отступы в интерактивных элементах */
-            .game-controls,
-            .quiz-navigation,
-            .certificate-controls {
-                gap: 15px;
-            }
-            
-            /* Улучшаем визуальную обратную связь при нажатии */
-            .grade-tab:active,
-            .nav-tab:active,
-            .game-btn:active,
-            .nav-btn:active,
-            .cert-btn:active,
-            .quiz-option:active,
-            .rule-card:active,
-            .example-card:active,
-            .social-icon:active {
-                transform: scale(0.96);
-                transition: transform 0.1s;
-            }
-        }
-
-        /* Адаптивная типографика для очень маленьких экранов */
         @media (max-width: 360px) {
             html {
                 font-size: 14px;
@@ -1347,44 +1233,6 @@
             }
         }
 
-        /* Безопасные зоны для iPhone X и новее */
-        @supports (padding: max(0px)) {
-            body, .container {
-                padding-left: max(10px, env(safe-area-inset-left));
-                padding-right: max(10px, env(safe-area-inset-right));
-            }
-            
-            footer {
-                padding-bottom: max(25px, env(safe-area-inset-bottom));
-            }
-        }
-
-        /* Улучшение производительности на мобильных */
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Оптимизация скролла на iOS */
-        .rule-grid,
-        .examples-grid,
-        .theory-grid,
-        .email-simulation {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Адаптация для очень высоких экранов (современные смартфоны) */
-        @media (min-height: 800px) and (max-width: 575px) {
-            .game-area {
-                min-height: 350px;
-            }
-            
-            .email-simulation {
-                max-height: 300px;
-            }
-        }
-
-        /* МЕДИА-ЗАПРОСЫ ДЛЯ ПЛАНШЕТОВ И КОМПЬЮТЕРОВ */
         @media (min-width: 768px) {
             html { font-size: 17px; }
             h1 { font-size: 2.5rem; }
@@ -1404,7 +1252,7 @@
         }
     </style>
 </head>
-<body class="no-select">
+<body>
     <div class="container">
         <header>
             <div class="logo-area">
@@ -1423,15 +1271,15 @@
 
             <!-- ВЫБОР КЛАССА -->
             <div class="grade-selector">
-                <button class="grade-tab grade-tab-1-4 active vibrate" onclick="selectGrade('1-4')">
+                <button class="grade-tab grade-tab-1-4 active" onclick="selectGrade('1-4')">
                     <i class="fas fa-child"></i> 1-4 классы
                     <span class="grade-badge badge-1-4">Для начинающих</span>
                 </button>
-                <button class="grade-tab grade-tab-5-9 vibrate" onclick="selectGrade('5-9')">
+                <button class="grade-tab grade-tab-5-9" onclick="selectGrade('5-9')">
                     <i class="fas fa-user-graduate"></i> 5-9 классы
                     <span class="grade-badge badge-5-9">Средний уровень</span>
                 </button>
-                <button class="grade-tab grade-tab-10-11 vibrate" onclick="selectGrade('10-11')">
+                <button class="grade-tab grade-tab-10-11" onclick="selectGrade('10-11')">
                     <i class="fas fa-user-tie"></i> 10-11 классы
                     <span class="grade-badge badge-10-11">Продвинутый</span>
                 </button>
@@ -1439,16 +1287,16 @@
 
             <!-- ГЛАВНОЕ МЕНЮ -->
             <nav class="main-nav">
-                <button class="nav-tab active vibrate" onclick="showSection('basics')">
+                <button class="nav-tab active" onclick="showSection('basics')">
                     <i class="fas fa-info-circle"></i> Основы
                 </button>
-                <button class="nav-tab vibrate" onclick="showSection('game')">
+                <button class="nav-tab" onclick="showSection('game')">
                     <i class="fas fa-gamepad"></i> Тренажёр
                 </button>
-                <button class="nav-tab vibrate" onclick="showSection('quiz')">
+                <button class="nav-tab" onclick="showSection('quiz')">
                     <i class="fas fa-brain"></i> Тест
                 </button>
-                <button class="nav-tab vibrate" onclick="showSection('examples')">
+                <button class="nav-tab" onclick="showSection('examples')">
                     <i class="fas fa-eye"></i> Примеры
                 </button>
             </nav>
@@ -1460,17 +1308,16 @@
                 <div class="section-card">
                     <h2><i class="fas fa-exclamation-triangle"></i> Что такое фишинг?</h2>
                     
-                    <!-- Теория для разных классов -->
                     <div class="theory-content active" id="theory-1-4">
                         <div class="info-box">
                             <p><strong>Для самых юных пользователей (1-4 классы)</strong></p>
-                            <p>Фишинг — это когда плохие люди в интернете пытаются обманом получить твои секреты: пароли, имена, адреса.</p>
+                            <p>Фишинг — это когда плохие люди в интернете пытаются обманом получить твои секреты.</p>
                         </div>
                         
                         <div class="theory-grid">
                             <div class="theory-card">
                                 <h3><i class="fas fa-fish"></i> Почему "фишинг"?</h3>
-                                <p>Слово происходит от английского "fishing" — рыбалка. Мошенники "забрасывают удочку" и ждут, когда ты "клюнешь" на их обман.</p>
+                                <p>Слово происходит от английского "fishing" — рыбалка. Мошенники "забрасывают удочку".</p>
                             </div>
                             
                             <div class="theory-card">
@@ -1484,7 +1331,7 @@
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-shield-alt"></i> Как защититься?</h3>
-                                <p>1. Всегда спрашивай родителей, если что-то непонятно<br>
+                                <p>1. Всегда спрашивай родителей<br>
                                    2. Не нажимай на подозрительные ссылки<br>
                                    3. Не рассказывай никому свои пароли</p>
                             </div>
@@ -1494,28 +1341,28 @@
                     <div class="theory-content" id="theory-5-9">
                         <div class="info-box">
                             <p><strong>Для средних классов (5-9 классы)</strong></p>
-                            <p>Фишинг — один из самых распространённых видов кибермошенничества, цель которого — получение доступа к конфиденциальной информации пользователя.</p>
+                            <p>Фишинг — один из самых распространённых видов кибермошенничества.</p>
                         </div>
                         
                         <div class="theory-grid">
                             <div class="theory-card">
                                 <h3><i class="fas fa-history"></i> История фишинга</h3>
-                                <p>Первый случай фишинга зафиксирован в 1995 году. Мошенники тогда собирали данные кредитных карт от имени AOL. С тех пор методы стали сложнее, но суть осталась прежней.</p>
+                                <p>Первый случай фишинга зафиксирован в 1995 году.</p>
                             </div>
                             
                             <div class="theory-card">
-                                <h3><i class="fas fa-chart-line"></i> Статистика в России</h3>
+                                <h3><i class="fas fa-chart-line"></i> Статистика</h3>
                                 <p>• 65% школьников сталкивались с фишингом<br>
-                                   • 40% хотя бы раз переходили по опасным ссылкам<br>
-                                   • 15% делились личными данными с незнакомцами</p>
+                                   • 40% переходили по опасным ссылкам<br>
+                                   • 15% делились личными данными</p>
                             </div>
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-cogs"></i> Технические аспекты</h3>
                                 <ul>
-                                    <li>Поддельные домены (vk.com vs vk-offis.ru)</li>
-                                    <li>Спам1-рассылки с вредоносными вложениями</li>
-                                    <li>Социальная инженерия в соцсетях</li>
+                                    <li>Поддельные домены</li>
+                                    <li>Спам-рассылки</li>
+                                    <li>Социальная инженерия</li>
                                 </ul>
                             </div>
                         </div>
@@ -1524,7 +1371,7 @@
                     <div class="theory-content" id="theory-10-11">
                         <div class="info-box">
                             <p><strong>Для старших классов (10-11 классы)</strong></p>
-                            <p>Фишинг — сложная многоуровневая система социальной инженерии, использующая психологические уловки и технические ухищрения для компрометации данных.</p>
+                            <p>Фишинг — сложная система социальной инженерии.</p>
                         </div>
                         
                         <div class="theory-grid">
@@ -1535,17 +1382,15 @@
                                     <li><strong>Срочность:</strong> "Аккаунт удалят через 2 часа!"</li>
                                     <li><strong>Авторитет:</strong> Подделка официальных лиц</li>
                                     <li><strong>Любопытство:</strong> "Посмотри, что о тебе пишут"</li>
-                                    <li><strong>Жадность:</strong> "Вы выиграли iPhone!"</li>
                                 </ul>
                             </div>
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-code"></i> Технические методы</h3>
                                 <ul>
-                                    <li>IDN-омография (использование похожих символов)</li>
-                                    <li>SSL-сертификаты для поддельных сайтов</li>
-                                    <li>Фишинг через мессенджеры и соцсети</li>
-                                    <li>Spear phishing (таргетированный фишинг)</li>
+                                    <li>IDN-омография</li>
+                                    <li>SSL-сертификаты</li>
+                                    <li>Spear phishing</li>
                                 </ul>
                             </div>
                             
@@ -1554,10 +1399,9 @@
                                 <p>В России фишинг преследуется по:</p>
                                 <ul>
                                     <li>Статья 159 УК РФ (Мошенничество)</li>
-                                    <li>Статья 272 УК РФ (Несанкционированный доступ)</li>
-                                    <li>Статья 273 УК РФ (Создание вредоносных программ)</li>
+                                    <li>Статья 272 УК РФ</li>
+                                    <li>Статья 273 УК РФ</li>
                                 </ul>
-                                <p>Наказание: от крупных штрафов до лишения свободы.</p>
                             </div>
                         </div>
                     </div>
@@ -1565,34 +1409,34 @@
                     <h3 style="margin-top: 30px; color: white;"><i class="fas fa-list-check"></i> Универсальные правила безопасности</h3>
                     
                     <div class="rule-grid">
-                        <div class="rule-card vibrate">
+                        <div class="rule-card">
                             <div class="rule-number">1</div>
                             <h3>Проверяй адрес сайта</h3>
-                            <p>vk.com (настоящий) vs vk-offis.ru (фишинг) — всегда проверяй домен!</p>
+                            <p>vk.com (настоящий) vs vk-offis.ru (фишинг)</p>
                         </div>
                         
-                        <div class="rule-card vibrate">
+                        <div class="rule-card">
                             <div class="rule-number">2</div>
                             <h3>Осторожно с письмами</h3>
-                            <p>Не переходи по ссылкам из подозрительных писем, даже если они от "друга"</p>
+                            <p>Не переходи по ссылкам из подозрительных писем</p>
                         </div>
                         
-                        <div class="rule-card vibrate">
+                        <div class="rule-card">
                             <div class="rule-number">3</div>
                             <h3>Включи 2FA</h3>
-                            <p>Двухфакторная аутентификация защитит даже если украдут пароль</p>
+                            <p>Двухфакторная аутентификация защитит аккаунт</p>
                         </div>
                         
-                        <div class="rule-card vibrate">
+                        <div class="rule-card">
                             <div class="rule-number">4</div>
                             <h3>Не верь срочности</h3>
-                            <p>«СРОЧНО», «СЕЙЧАС ЖЕ», «АККАУНТ УДАЛЯТ» — признаки фишинга</p>
+                            <p>«СРОЧНО», «СЕЙЧАС ЖЕ» — признаки фишинга</p>
                         </div>
                         
-                        <div class="rule-card vibrate">
+                        <div class="rule-card">
                             <div class="rule-number">5</div>
                             <h3>Расскажи взрослым</h3>
-                            <p>Если что-то подозрительно — сразу к родителям или учителю</p>
+                            <p>Если что-то подозрительно — сразу к родителям</p>
                         </div>
                     </div>
                 </div>
@@ -1626,24 +1470,23 @@
                             <div class="email-simulation">
                                 <div class="email-header">
                                     <p><strong>От:</strong> <span id="emailFrom">Сбербанк Онлайн</span></p>
-                                    <p><strong>Тема:</strong> <span id="emailSubject">Срочное уведомление о блокировке карты</span></p>
+                                    <p><strong>Тема:</strong> <span id="emailSubject">Срочное уведомление</span></p>
                                 </div>
                                 <div id="emailContent">
                                     <p>Уважаемый клиент!</p>
-                                    <p>Наша система безопасности обнаружила подозрительные операции по вашей карте. 
-                                    Для предотвращения мошенничества необходимо срочно подтвердить данные карты.</p>
-                                    <p>Перейдите по ссылке для подтверждения: 
-                                    <a href="#" style="color: #4361ee;">https://sberbank-online-secure.com/verify</a></p>
-                                    <p>Если вы не подтвердите данные в течение 2 часов, карта будет заблокирована.</p>
-                                    <p>С уважением, Служба безопасности Сбербанка</p>
+                                    <p>Наша система обнаружила подозрительные операции.</p>
+                                    <p>Перейдите по ссылке: 
+                                    <a href="#" style="color: #4361ee;">https://sberbank-online-secure.com</a></p>
+                                    <p>Если вы не подтвердите данные, карта будет заблокирована.</p>
+                                    <p>С уважением, Служба безопасности</p>
                                 </div>
                             </div>
                             
                             <div class="game-controls">
-                                <button class="game-btn game-btn-phishing vibrate" onclick="checkGameAnswer('phishing')">
+                                <button class="game-btn game-btn-phishing" onclick="checkGameAnswer('phishing')">
                                     <i class="fas fa-times-circle"></i> Это ФИШИНГ
                                 </button>
-                                <button class="game-btn game-btn-safe vibrate" onclick="checkGameAnswer('safe')">
+                                <button class="game-btn game-btn-safe" onclick="checkGameAnswer('safe')">
                                     <i class="fas fa-check-circle"></i> Это БЕЗОПАСНО
                                 </button>
                             </div>
@@ -1659,19 +1502,17 @@
                 <div class="quiz-container">
                     <h2><i class="fas fa-brain"></i> Проверь свои знания</h2>
                     <p style="margin-bottom: 20px; color: rgba(255, 255, 255, 0.9); font-size: 1rem;">
-                        <span id="quizInfo">Тест для 1-4 классов (10 простых вопросов)</span>
+                        <span id="quizInfo">Тест для 1-4 классов (10 вопросов)</span>
                     </p>
                     
                     <div class="quiz-progress">
                         <div class="quiz-progress-bar" id="quizProgress"></div>
                     </div>
                     
-                    <div id="quizArea">
-                        <!-- Вопросы будут загружены через JavaScript -->
-                    </div>
+                    <div id="quizArea"></div>
                     
                     <div class="quiz-navigation">
-                        <button class="nav-btn vibrate" id="prevBtn" onclick="prevQuestion()" disabled>
+                        <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>
                             <i class="fas fa-arrow-left"></i> Назад
                         </button>
                         
@@ -1679,25 +1520,23 @@
                             Вопрос <span id="currentQ">1</span> из <span id="totalQ">10</span>
                         </div>
                         
-                        <button class="nav-btn vibrate" id="nextBtn" onclick="nextQuestion()">
+                        <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">
                             Далее <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                     
-                    <!-- Результаты теста -->
                     <div class="result-screen hidden" id="resultScreen">
                         <h3>Результаты тестирования</h3>
                         <div class="result-score" id="finalScore">0%</div>
                         <p id="resultMessage" style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4;"></p>
-                        <button class="nav-btn vibrate" onclick="showCertificate()">
+                        <button class="nav-btn" onclick="showCertificate()">
                             <i class="fas fa-award"></i> Получить сертификат
                         </button>
-                        <button class="nav-btn vibrate" onclick="restartQuiz()" style="background: var(--secondary);">
+                        <button class="nav-btn" onclick="restartQuiz()" style="background: var(--secondary);">
                             <i class="fas fa-redo"></i> Пройти снова
                         </button>
                     </div>
                     
-                    <!-- Сертификат -->
                     <div class="certificate-container hidden" id="certificateScreen">
                         <h3><i class="fas fa-award"></i> Сертификат об успешном прохождении</h3>
                         
@@ -1731,8 +1570,7 @@
                                 <div class="certificate-grade" id="certificateGrade">Оценка: 5 (Отлично)</div>
                                 
                                 <p style="margin: 20px 0; font-size: 1rem; line-height: 1.5;">
-                                    Настоящий сертификат подтверждает, что владелец успешно прошёл обучение 
-                                    по программе "Фишинг.NET" и обладает знаниями для безопасной работы в интернете.
+                                    Настоящий сертификат подтверждает успешное прохождение программы "Фишинг.NET".
                                 </p>
                                 
                                 <div class="certificate-footer">
@@ -1751,16 +1589,16 @@
                         </div>
                         
                         <div class="certificate-controls">
-                            <button class="cert-btn vibrate" onclick="downloadCertificate()">
+                            <button class="cert-btn" onclick="downloadCertificate()">
                                 <i class="fas fa-download"></i> Скачать PDF
                             </button>
-                            <button class="cert-btn vibrate" onclick="shareCertificate()" style="background: var(--success);">
+                            <button class="cert-btn" onclick="shareCertificate()" style="background: var(--success);">
                                 <i class="fas fa-share"></i> Поделиться
                             </button>
-                            <button class="cert-btn vibrate" onclick="printCertificate()" style="background: var(--accent);">
+                            <button class="cert-btn" onclick="printCertificate()" style="background: var(--accent);">
                                 <i class="fas fa-print"></i> Распечатать
                             </button>
-                            <button class="cert-btn vibrate" onclick="restartQuiz()" style="background: var(--secondary);">
+                            <button class="cert-btn" onclick="restartQuiz()" style="background: var(--secondary);">
                                 <i class="fas fa-redo"></i> Новый тест
                             </button>
                         </div>
@@ -1774,47 +1612,44 @@
                     <h2><i class="fas fa-eye"></i> Примеры фишинга</h2>
                     
                     <div class="examples-grid">
-                        <div class="example-card vibrate">
+                        <div class="example-card">
                             <div class="example-header example-bad">
                                 <i class="fas fa-times-circle"></i> ОПАСНО: Фишинговая ссылка
                             </div>
                             <div class="example-content">
-                                <p><strong>Письмо:</strong> "Вы выиграли iPhone! Перейдите по ссылке для получения"</p>
-                                <p><strong>Ссылка:</strong> apple-gift-free.com (не apple.com)</p>
-                                <p><strong>Признаки:</strong> Неожиданный выигрыш, поддельный домен</p>
+                                <p><strong>Письмо:</strong> "Вы выиграли iPhone!"</p>
+                                <p><strong>Ссылка:</strong> apple-gift-free.com</p>
+                                <p><strong>Признаки:</strong> Неожиданный выигрыш</p>
                             </div>
                         </div>
                         
-                        <div class="example-card vibrate">
+                        <div class="example-card">
                             <div class="example-header example-good">
                                 <i class="fas fa-check-circle"></i> БЕЗОПАСНО: Настоящее уведомление
                             </div>
                             <div class="example-content">
                                 <p><strong>Письмо:</strong> "Новый вход в ваш аккаунт"</p>
                                 <p><strong>От кого:</strong> no-reply@accounts.google.com</p>
-                                <p><strong>Что делать:</strong> Проверить активность в настройках аккаунта</p>
                             </div>
                         </div>
                         
-                        <div class="example-card vibrate">
+                        <div class="example-card">
                             <div class="example-header example-bad">
-                                <i class="fas fa-times-circle"></i> ОПАСНО: Поддельная страница входа
+                                <i class="fas fa-times-circle"></i> ОПАСНО: Поддельная страница
                             </div>
                             <div class="example-content">
                                 <p><strong>Сайт:</strong> vkontakte-login.ru</p>
                                 <p><strong>Настоящий:</strong> vk.com</p>
-                                <p><strong>Признаки:</strong> Другой домен, просит ввести пароль</p>
                             </div>
                         </div>
                         
-                        <div class="example-card vibrate">
+                        <div class="example-card">
                             <div class="example-header example-good">
-                                <i class="fas fa-check-circle"></i> БЕЗОПАСНО: Подтверждение email
+                                <i class="fas fa-check-circle"></i> БЕЗОПАСНО: Подтверждение
                             </div>
                             <div class="example-content">
                                 <p><strong>Письмо:</strong> "Подтвердите ваш email"</p>
-                                <p><strong>Когда:</strong> После вашей регистрации на сайте</p>
-                                <p><strong>Признаки:</strong> Ожидаемое действие, правильный отправитель</p>
+                                <p><strong>Когда:</strong> После регистрации</p>
                             </div>
                         </div>
                     </div>
@@ -1826,17 +1661,17 @@
             <div class="section-card" style="background: rgba(0, 0, 0, 0.2);">
                 <h2><i class="fas fa-share-alt"></i> Поделись знаниями!</h2>
                 <p style="text-align: center; margin-bottom: 20px; font-size: 1rem; line-height: 1.4;">
-                    Расскажи друзьям о фишинге и помоги им не попасться на удочку мошенников
+                    Расскажи друзьям о фишинге
                 </p>
                 
                 <div class="social-links">
-                    <a href="#" class="social-icon vibrate" onclick="shareSite()">
+                    <a href="#" class="social-icon" onclick="shareSite()">
                         <i class="fas fa-share"></i>
                     </a>
-                    <a href="#" class="social-icon vibrate" onclick="copyLink()">
+                    <a href="#" class="social-icon" onclick="copyLink()">
                         <i class="fas fa-link"></i>
                     </a>
-                    <a href="#" class="social-icon vibrate" onclick="printPage()">
+                    <a href="#" class="social-icon" onclick="printPage()">
                         <i class="fas fa-print"></i>
                     </a>
                 </div>
@@ -1844,13 +1679,10 @@
                 <div style="margin-top: 25px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px;">
                     <h3><i class="fas fa-map-marker-alt"></i> О проекте</h3>
                     <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.5;">
-                        <strong>Фишинг.NET</strong> — образовательный проект, разработанный в Астраханской области 
-                        для защиты школьников от кибермошенников. Проект соответствует государственным программам 
-                        цифровой грамотности и рекомендован для использования в школах региона.
+                        <strong>Фишинг.NET</strong> — образовательный проект для защиты школьников.
                     </p>
                     <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.7); font-size: 0.85rem; line-height: 1.4;">
-                        © 2025 Фишинг.NET — Образовательный проект по кибербезопасности<br>
-                        Астраханская область • Для школьников • Версия 4.0
+                        © 2025 Фишинг.NET • Астраханская область • Версия 4.0
                     </p>
                 </div>
             </div>
@@ -1858,14 +1690,13 @@
     </div>
 
     <script>
-        // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+        // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
         let currentGrade = '1-4';
         let gameState = {
             score: 0,
             correct: 0,
             level: 1,
-            currentEmail: 0,
-            emails: []
+            currentEmail: 0
         };
 
         let quizState = {
@@ -1883,135 +1714,79 @@
             grade: ""
         };
 
-        // ========== БАЗА ДАННЫХ ДЛЯ ИГРЫ ==========
+        // БАЗА ДАННЫХ ДЛЯ ИГРЫ
         const emailTemplates = {
             '1-4': [
-                // ФИШИНГ для 1-4 классов
                 {
                     from: "Игровой магазин Roblox",
                     subject: "Ты выиграл бесплатные робуксы!",
                     content: `Привет, друг!<br><br>
-                            Ты только что выиграл 1000 бесплатных робуксов!<br><br>
+                            Ты выиграл 1000 бесплатных робуксов!<br><br>
                             Чтобы получить приз, перейди по ссылке:
                             <a href="#" style="color: #4361ee;">https://roblox-free-robux.com</a><br><br>
-                            Предложение действует только 10 минут!<br><br>
-                            Твой друг из Roblox`,
+                            Предложение действует только 10 минут!`,
                     type: "phishing",
-                    clues: ["Бесплатные робуксы не раздаются", "Другой домен", "Ограниченное время"]
+                    clues: ["Бесплатные робуксы не раздаются", "Другой домен"]
                 },
                 {
                     from: "Майнкрафт Официальный",
                     subject: "Получи бесплатный скин!",
-                    content: `Ура! Ты выиграл эксклюзивный скин для Майнкрафт.<br><br>
+                    content: `Ура! Ты выиграл эксклюзивный скин.<br><br>
                             Скачай его здесь:
                             <a href="#" style="color: #4361ee;">https://minecraft-free-skins.ru</a><br><br>
                             Скин будет доступен только сегодня!`,
                     type: "phishing",
-                    clues: ["Официальный Minecraft не раздаёт бесплатные скины", "Подозрительный домен"]
+                    clues: ["Официальный Minecraft не раздаёт скины"]
                 },
-                // БЕЗОПАСНЫЕ для 1-4 классов
                 {
                     from: "Учитель информатики",
                     subject: "Урок по безопасности",
                     content: `Привет!<br><br>
-                            На следующем уроке мы будем изучать безопасность в интернете.<br><br>
+                            На следующем уроке будем изучать безопасность.<br><br>
                             Подготовься, пожалуйста.<br><br>
                             Твой учитель`,
                     type: "safe",
-                    explanation: "Это обычное письмо от учителя, без ссылок и требований."
+                    explanation: "Это обычное письмо от учителя."
                 }
             ],
             '5-9': [
-                // ФИШИНГ для 5-9 классов
                 {
                     from: "Steam Поддержка",
                     subject: "Ваш аккаунт выиграл приз!",
                     content: `Congratulations!<br><br>
-                            Your Steam account has been randomly selected to receive a free game!<br><br>
+                            Your Steam account has been selected to receive a free game!<br><br>
                             Claim your prize now: 
-                            <a href="#" style="color: #4361ee;">https://steam-gift-community.com/redeem</a><br><br>
-                            This offer expires in 3 hours. Don't miss your chance!<br><br>
-                            Steam Support Team`,
+                            <a href="#" style="color: #4361ee;">https://steam-gift-community.com</a><br><br>
+                            This offer expires in 3 hours.`,
                     type: "phishing",
-                    clues: ["Неожиданный выигрыш", "Другой домен", "Ограниченное время"]
+                    clues: ["Неожиданный выигрыш", "Другой домен"]
                 },
                 {
                     from: "Администрация ВКонтакте",
                     subject: "Срочно: Ваш аккаунт будет удалён!",
                     content: `Уважаемый пользователь!<br><br>
-                            Наша система обнаружила нарушения в вашем аккаунте. 
-                            Ваша страница будет удалена через 24 часа.<br><br>
-                            Чтобы остановить удаление, перейдите по ссылке и подтвердите данные:
+                            Наша система обнаружила нарушения.<br><br>
+                            Чтобы остановить удаление, перейдите:
                             <a href="#" style="color: #4361ee;">https://vk-security-confirm.ru</a><br><br>
-                            Не игнорируйте это сообщение!<br><br>
-                            Служба безопасности ВКонтакте`,
+                            Не игнорируйте это сообщение!`,
                     type: "phishing",
-                    clues: ["Угроза удаления", "Неофициальный домен", "Создание паники"]
+                    clues: ["Угроза удаления", "Неофициальный домен"]
                 },
-                // БЕЗОПАСНЫЕ для 5-9 классов
                 {
                     from: "no-reply@github.com",
                     subject: "New sign-in to your account",
                     content: `Hi there,<br><br>
-                            We noticed a new sign-in to your GitHub account from:<br>
-                            • Location: Moscow, Russia<br>
-                            • Browser: Chrome on Windows<br>
-                            • Time: Just now<br><br>
-                            If this was you, you can ignore this email.<br>
-                            If this wasn't you, please review your account security:
+                            We noticed a new sign-in to your GitHub account.<br><br>
+                            If this wasn't you, please review security:
                             <a href="#" style="color: #4361ee;">https://github.com/settings/security</a><br><br>
-                            Thanks,<br>
-                            The GitHub Team`,
+                            Thanks, GitHub Team`,
                     type: "safe",
-                    explanation: "Это стандартное уведомление о безопасности от GitHub."
-                }
-            ],
-            '10-11': [
-                // ФИШИНГ для 10-11 классов
-                {
-                    from: "HR Department",
-                    subject: "Job Offer - Immediate Start",
-                    content: `Dear Candidate,<br><br>
-                            We are pleased to offer you a remote position with salary $5000/month.<br><br>
-                            To proceed, we need your passport details and bank information:<br>
-                            <a href="#" style="color: #4361ee;">https://job-fast-hire.com/secure-form</a><br><br>
-                            This offer is valid for 24 hours only.<br><br>
-                            HR Manager`,
-                    type: "phishing",
-                    clues: ["Слишком хорошее предложение", "Требует паспортные данные", "Подозрительный домен"]
-                },
-                {
-                    from: "Tax Service RU",
-                    subject: "Tax Refund Available",
-                    content: `Уважаемый налогоплательщик,<br><br>
-                            Вам положен налоговый вычет в размере 15 000 руб.<br><br>
-                            Для получения заполните форму:
-                            <a href="#" style="color: #4361ee;">https://nalog-refund-service.com</a><br><br>
-                            Требуются данные банковской карты для перевода.<br><br>
-                            ФНС России`,
-                    type: "phishing",
-                    clues: ["ФНС не запрашивает данные карт по email", "Неофициальный домен"]
-                },
-                // БЕЗОПАСНЫЕ для 10-11 классов
-                {
-                    from: "Google Workspace",
-                    subject: "Security alert for your account",
-                    content: `Security Alert<br><br>
-                            A new device signed in to your Google Workspace account.<br><br>
-                            • Device: Windows NT<br>
-                            • Location: Saint Petersburg, Russia<br>
-                            • Time: 2 minutes ago<br><br>
-                            If this was you, you can ignore this alert.<br>
-                            If not, secure your account:
-                            <a href="#" style="color: #4361ee;">https://myaccount.google.com/security</a><br><br>
-                            Google Security Team`,
-                    type: "safe",
-                    explanation: "Официальное уведомление Google о безопасности."
+                    explanation: "Стандартное уведомление о безопасности."
                 }
             ]
         };
 
-        // ========== БАЗА ВОПРОСОВ ДЛЯ ТЕСТА ==========
+        // БАЗА ВОПРОСОВ ДЛЯ ТЕСТА
         const questionBank = {
             '1-4': [
                 {
@@ -2053,74 +1828,14 @@
                         "Нужен ключ"
                     ],
                     correct: 1
-                },
-                {
-                    question: "Можно ли переходить по ссылкам из писем от незнакомцев?",
-                    options: [
-                        "Да, всегда",
-                        "Нет, никогда",
-                        "Только если письмо красивое",
-                        "Только вечером"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что делать, если выиграл iPhone в интернете?",
-                    options: [
-                        "Срочно получить приз",
-                        "Рассказать друзьям",
-                        "Спросить у родителей",
-                        "Удалить письмо"
-                    ],
-                    correct: 2
-                },
-                {
-                    question: "Какой пароль самый безопасный?",
-                    options: [
-                        "123456",
-                        "qwerty",
-                        "Имя и дата рождения",
-                        "Разные буквы и цифры"
-                    ],
-                    correct: 3
-                },
-                {
-                    question: "Кому можно рассказывать свой домашний адрес в интернете?",
-                    options: [
-                        "Всем друзьям",
-                        "Никому",
-                        "Только тем, кто просит",
-                        "Только взрослым из семьи"
-                    ],
-                    correct: 3
-                },
-                {
-                    question: "Что такое двухфакторная аутентификация?",
-                    options: [
-                        "Два пароля",
-                        "Пароль и код из SMS",
-                        "Два аккаунта",
-                        "Два компьютера"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "К кому обращаться, если в интернете что-то напугало?",
-                    options: [
-                        "К другу в соцсети",
-                        "К родителям или учителю",
-                        "Ни к кому",
-                        "К незнакомцу в чате"
-                    ],
-                    correct: 1
                 }
             ],
             '5-9': [
                 {
-                    question: "Как отличить фишинговый сайт от настоящего?",
+                    question: "Как отличить фишинговый сайт?",
                     options: [
                         "По цвету дизайна",
-                        "По наличию HTTPS и правильному домену",
+                        "По HTTPS и правильному домену",
                         "По количеству картинок",
                         "По скорости загрузки"
                     ],
@@ -2137,7 +1852,7 @@
                     correct: 1
                 },
                 {
-                    question: "Какой email отправителя наиболее подозрительный?",
+                    question: "Какой email отправителя подозрительный?",
                     options: [
                         "support@yandex.ru",
                         "no-reply@google.com",
@@ -2147,79 +1862,19 @@
                     correct: 3
                 },
                 {
-                    question: "Что делать при получении фишингового письма?",
+                    question: "Что делать при фишинговом письме?",
                     options: [
                         "Ответить отправителю",
-                        "Перейти по ссылке для проверки",
+                        "Перейти по ссылке",
                         "Пометить как спам и удалить",
                         "Сохранить в архиве"
                     ],
                     correct: 2
-                },
-                {
-                    question: "Какой признак НЕ указывает на фишинг?",
-                    options: [
-                        "Ошибки в тексте письма",
-                        "Официальный логотип компании",
-                        "Требование срочных действий",
-                        "Незнакомый отправитель"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что такое IDN-омография в фишинге?",
-                    options: [
-                        "Использование похожих символов в домене",
-                        "Отправка писем с изображениями",
-                        "Фишинг через мобильные приложения",
-                        "Создание клонов сайтов"
-                    ],
-                    correct: 0
-                },
-                {
-                    question: "Как защитить аккаунт в соцсетях?",
-                    options: [
-                        "Использовать один пароль везде",
-                        "Включить двухфакторную аутентификацию",
-                        "Доверить пароль другу",
-                        "Ничего не делать"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что такое социальная инженерия?",
-                    options: [
-                        "Изучение общества",
-                        "Манипулирование людьми для получения информации",
-                        "Создание социальных сетей",
-                        "Обучение общению"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Какой закон РФ защищает от кибермошенничества?",
-                    options: [
-                        "Закон об образовании",
-                        "Уголовный кодекс (статья 159)",
-                        "Конституция РФ",
-                        "Закон о рекламе"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что делать, если всё же ввёл данные на фишинговом сайте?",
-                    options: [
-                        "Ничего не делать",
-                        "Срочно сменить пароли",
-                        "Написать мошенникам",
-                        "Удалить аккаунт"
-                    ],
-                    correct: 1
                 }
             ],
             '10-11': [
                 {
-                    question: "Какие психологические приёмы использует фишинг?",
+                    question: "Какие психологические приёмы?",
                     options: [
                         "Только страх и жадность",
                         "Срочность, авторитет, любопытство, жадность",
@@ -2229,7 +1884,7 @@
                     correct: 1
                 },
                 {
-                    question: "Что такое whaling в контексте фишинга?",
+                    question: "Что такое whaling?",
                     options: [
                         "Фишинг на руководящих сотрудников",
                         "Фишинг через мессенджеры",
@@ -2239,9 +1894,9 @@
                     correct: 0
                 },
                 {
-                    question: "Как работает фишинг через поддельные SSL-сертификаты?",
+                    question: "Как работают поддельные SSL?",
                     options: [
-                        "Создаёт полностью безопасные сайты",
+                        "Создаёт безопасные сайты",
                         "Имитирует защищённое соединение",
                         "Шифрует данные жертвы",
                         "Блокирует антивирусы"
@@ -2249,114 +1904,48 @@
                     correct: 1
                 },
                 {
-                    question: "Что такое кейлоггер в контексте фишинга?",
+                    question: "Что такое кейлоггер?",
                     options: [
-                        "Программа для логирования нажатий клавиш",
+                        "Программа для логирования нажатий",
                         "Тип фишингового письма",
                         "Метод социальной инженерии",
                         "Вид шифрования"
                     ],
                     correct: 0
-                },
-                {
-                    question: "Как защитить бизнес от фишинговых атак?",
-                    options: [
-                        "Только антивирусом",
-                        "Обучением сотрудников и техническими мерами",
-                        "Отключением интернета",
-                        "Использованием простых паролей"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что такое DMARC в защите от фишинга?",
-                    options: [
-                        "Протокол аутентификации email",
-                        "Тип фишинговой атаки",
-                        "Метод шифрования",
-                        "Антивирусная программа"
-                    ],
-                    correct: 0
-                },
-                {
-                    question: "Какова средняя стоимость ущерба от фишинга для компании?",
-                    options: [
-                        "Около 1 млн рублей",
-                        "Около 10 млн рублей",
-                        "Около 100 млн рублей",
-                        "Около 1 млрд рублей"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Что такое zero-day фишинг?",
-                    options: [
-                        "Фишинг в день запуска сайта",
-                        "Использование неизвестных уязвимостей",
-                        "Фишинг только по понедельникам",
-                        "Фишинг с нулевым бюджетом"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Как работают фишинговые кампании через соцсети?",
-                    options: [
-                        "Только через фейковые аккаунты",
-                        "Через рекламу, фейки и взломанные аккаунты",
-                        "Только через мессенджеры",
-                        "Только через комментарии"
-                    ],
-                    correct: 1
-                },
-                {
-                    question: "Какие перспективы у борьбы с фишингом с использованием ИИ?",
-                    options: [
-                        "ИИ только помогает мошенникам",
-                        "ИИ помогает как защитникам, так и атакующим",
-                        "ИИ неэффективен против фишинга",
-                        "ИИ полностью решит проблему фишинга"
-                    ],
-                    correct: 1
                 }
             ]
         };
 
-        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        // ИНИЦИАЛИЗАЦИЯ
         document.addEventListener('DOMContentLoaded', function() {
             initializeGrade('1-4');
             showSection('basics');
-            addTouchSupport();
         });
 
-        // ========== ВЫБОР КЛАССА ==========
+        // ВЫБОР КЛАССА
         function selectGrade(grade) {
             currentGrade = grade;
             
-            // Обновляем активную вкладку
             document.querySelectorAll('.grade-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             document.querySelector(`.grade-tab-${grade}`).classList.add('active');
             
-            // Обновляем теорию
             document.querySelectorAll('.theory-content').forEach(content => {
                 content.classList.remove('active');
             });
             document.getElementById(`theory-${grade}`).classList.add('active');
             
-            // Обновляем сложность в игре
             document.getElementById('gameDifficulty').textContent = 
                 grade === '1-4' ? 'Уровень: Начинающий (1-4 классы)' :
                 grade === '5-9' ? 'Уровень: Средний (5-9 классы)' :
                 'Уровень: Продвинутый (10-11 классы)';
             
-            // Обновляем информацию о тесте
             document.getElementById('quizInfo').textContent = 
-                grade === '1-4' ? 'Тест для 1-4 классов (10 простых вопросов)' :
-                grade === '5-9' ? 'Тест для 5-9 классов (10 вопросов средней сложности)' :
-                'Тест для 10-11 классов (10 сложных вопросов)';
+                grade === '1-4' ? 'Тест для 1-4 классов (10 вопросов)' :
+                grade === '5-9' ? 'Тест для 5-9 классов (10 вопросов)' :
+                'Тест для 10-11 классов (10 вопросов)';
             
-            // Перезагружаем игру и тест
             if (document.getElementById('game').classList.contains('active')) {
                 initializeGame();
             }
@@ -2366,7 +1955,7 @@
             }
         }
 
-        // ========== НАВИГАЦИЯ ПО СЕКЦИЯМ ==========
+        // НАВИГАЦИЯ ПО СЕКЦИЯМ
         function showSection(sectionId) {
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
@@ -2392,7 +1981,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ========== ИГРА: ТРЕНАЖЁР ==========
+        // ИГРА: ТРЕНАЖЁР
         function initializeGame() {
             gameState = {
                 score: 0,
@@ -2437,7 +2026,7 @@
                 feedback.innerHTML = `
                     <h4><i class="fas fa-check-circle"></i> Правильно!</h4>
                     <p>${emailType === 'phishing' ? 
-                        'Это фишинг! Признаки: ' + template.clues.join(', ') : 
+                        'Это фишинг! ' + template.clues.join(', ') : 
                         template.explanation}</p>
                 `;
                 feedback.classList.add('correct', 'show');
@@ -2450,7 +2039,7 @@
                     <h4><i class="fas fa-times-circle"></i> Неправильно!</h4>
                     <p>Это ${emailType === 'phishing' ? 'фишинг' : 'безопасное письмо'}.</p>
                     <p>${emailType === 'phishing' ? 
-                        'Признаки фишинга: ' + template.clues.join(', ') : 
+                        'Признаки: ' + template.clues.join(', ') : 
                         template.explanation}</p>
                 `;
                 feedback.classList.add('incorrect', 'show');
@@ -2473,7 +2062,7 @@
             document.getElementById('level').textContent = gameState.level;
         }
 
-        // ========== ТЕСТИРОВАНИЕ ==========
+        // ТЕСТИРОВАНИЕ
         function initializeQuiz() {
             const questions = questionBank[currentGrade];
             
@@ -2504,7 +2093,7 @@
             question.options.forEach((option, index) => {
                 const isSelected = quizState.userAnswers[currentQ] === index;
                 optionsHTML += `
-                    <div class="quiz-option vibrate ${isSelected ? 'selected' : ''}" 
+                    <div class="quiz-option ${isSelected ? 'selected' : ''}" 
                          onclick="selectAnswer(${index})">
                         ${option}
                     </div>
@@ -2569,7 +2158,6 @@
             const percentage = Math.round((correctAnswers / quizState.totalQuestions) * 100);
             const grade = getGrade(percentage);
             
-            // Сохраняем результат
             quizState.testResult = {
                 percentage: percentage,
                 correct: correctAnswers,
@@ -2580,18 +2168,18 @@
             
             let message = "";
             if (percentage >= 90) {
-                message = "Отлично! Ты настоящий эксперт по кибербезопасности!";
+                message = "Отлично! Ты настоящий эксперт!";
             } else if (percentage >= 70) {
-                message = "Хорошо! Ты хорошо разбираешься в теме.";
+                message = "Хорошо! Ты хорошо разбираешься.";
             } else if (percentage >= 50) {
                 message = "Неплохо! Основы ты знаешь.";
             } else {
-                message = "Есть над чем поработать! Повтори материал выше.";
+                message = "Есть над чем поработать!";
             }
             
             document.getElementById('finalScore').textContent = `${percentage}%`;
             document.getElementById('resultMessage').textContent = 
-                `${correctAnswers} правильных ответов из ${quizState.totalQuestions}. ${message} Оценка: ${grade.text}`;
+                `${correctAnswers} правильных из ${quizState.totalQuestions}. ${message}`;
             
             document.getElementById('quizArea').style.display = 'none';
             document.querySelector('.quiz-navigation').style.display = 'none';
@@ -2608,7 +2196,6 @@
         }
 
         function showCertificate() {
-            // Запрашиваем данные пользователя, если их нет
             if (!userData.name) {
                 getUserData();
                 return;
@@ -2620,9 +2207,9 @@
         }
 
         function getUserData() {
-            const name = prompt("Введите ваше имя и фамилию для сертификата:", "Иван Иванов");
-            const school = prompt("Введите название вашей школы:", "Школа №1 г. Астрахань");
-            const grade = prompt("Введите ваш класс:", "5А");
+            const name = prompt("Введите ваше имя и фамилию:", "Иван Иванов");
+            const school = prompt("Введите школу:", "Школа №1 г. Астрахань");
+            const grade = prompt("Введите класс:", "5А");
             
             if (name && school && grade) {
                 userData = { name, school, grade };
@@ -2630,7 +2217,7 @@
                 document.getElementById('resultScreen').classList.add('hidden');
                 document.getElementById('certificateScreen').classList.remove('hidden');
             } else {
-                alert("Для получения сертификата необходимо ввести данные.");
+                alert("Для сертификата нужны данные.");
             }
         }
 
@@ -2651,14 +2238,14 @@
         }
 
         function downloadCertificate() {
-            alert("В реальном приложении здесь бы генерировался PDF-файл сертификата для скачивания.");
+            alert("В реальном приложении генерируется PDF.");
         }
 
         function shareCertificate() {
             if (navigator.share) {
                 navigator.share({
-                    title: `Мой сертификат по кибербезопасности: ${quizState.testResult.percentage}%`,
-                    text: `Я прошёл тест по кибербезопасности на ${quizState.testResult.percentage}%! Присоединяйся к проекту Фишинг.NET!`,
+                    title: `Мой сертификат: ${quizState.testResult.percentage}%`,
+                    text: `Я прошёл тест по кибербезопасности!`,
                     url: window.location.href
                 });
             } else {
@@ -2674,7 +2261,6 @@
             window.print();
             document.body.innerHTML = originalContent;
             
-            // Восстанавливаем состояние
             document.getElementById('certificateScreen').classList.remove('hidden');
         }
 
@@ -2685,25 +2271,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ========== ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ==========
-        function addTouchSupport() {
-            const touchElements = document.querySelectorAll('.vibrate');
-            touchElements.forEach(element => {
-                element.addEventListener('touchstart', function() {
-                    this.classList.add('active');
-                });
-                
-                element.addEventListener('touchend', function() {
-                    this.classList.remove('active');
-                });
-            });
-        }
-
+        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
         function shareSite() {
             if (navigator.share) {
                 navigator.share({
                     title: 'Фишинг.NET - Безопасность в интернете',
-                    text: 'Научись распознавать фишинг и защити свои данные! Проект из Астраханской области.',
+                    text: 'Научись распознавать фишинг!',
                     url: window.location.href
                 });
             } else {
@@ -2713,41 +2286,13 @@
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                alert('Ссылка скопирована! Поделись ею с друзьями.');
+                alert('Ссылка скопирована!');
             });
         }
 
         function printPage() {
             window.print();
         }
-
-        // ========== ОБРАБОТКА КЛАВИАТУРЫ ==========
-        document.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && !e.target.matches('input, textarea')) {
-                e.preventDefault();
-                const nextBtn = document.getElementById('nextBtn');
-                if (nextBtn && !nextBtn.disabled) {
-                    nextBtn.click();
-                }
-            }
-            
-            if (e.code === 'ArrowRight') {
-                const nextBtn = document.getElementById('nextBtn');
-                if (nextBtn && !nextBtn.disabled) {
-                    nextBtn.click();
-                }
-            }
-            
-            if (e.code === 'ArrowLeft') {
-                const prevBtn = document.getElementById('prevBtn');
-                if (prevBtn && !prevBtn.disabled) {
-                    prevBtn.click();
-                }
-            }
-        });
     </script>
 </body>
-</html>    
-           
-                                
-            
+</html>
