@@ -2293,6 +2293,967 @@
         function printPage() {
             window.print();
         }
+        <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Фишинг.NET - Астрахань 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем библиотеку для генерации PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --grade-1-4: #4CAF50;
+            --grade-5-9: #2196F3;
+            --grade-10-11: #FF9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 0 10px;
+            position: relative;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-animation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            color: white;
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo-icon:nth-child(1) { color: var(--primary); animation: pulse 2s infinite; }
+        .logo-icon:nth-child(2) { color: var(--accent); animation: pulse 2s infinite 0.5s; }
+        .logo-icon:nth-child(3) { color: var(--success); animation: pulse 2s infinite 1s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(to right, var(--primary), var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+            padding: 0 10px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 100%;
+            margin: 0 auto 15px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+
+        .astrakhan-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1c3c7a, #d52b1e);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* КЛАССЫ */
+        .grade-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 576px) {
+            .grade-selector {
+                flex-direction: row;
+            }
+        }
+
+        .grade-tab {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            flex: 1;
+            min-height: 60px;
+            text-align: center;
+        }
+
+        .grade-tab.active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .grade-tab-1-4.active { background: var(--grade-1-4); }
+        .grade-tab-5-9.active { background: var(--grade-5-9); }
+        .grade-tab-10-11.active { background: var(--grade-10-11); }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .badge-1-4 { background: var(--grade-1-4); }
+        .badge-5-9 { background: var(--grade-5-9); }
+        .badge-10-11 { background: var(--grade-10-11); }
+
+        /* НАВИГАЦИЯ */
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        @media (min-width: 576px) {
+            .main-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+            width: 100%;
+            min-height: 60px;
+        }
+
+        @media (min-width: 576px) {
+            .nav-tab {
+                flex: 1;
+                min-width: 160px;
+            }
+        }
+
+        .nav-tab:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
+        }
+
+        .nav-tab i {
+            font-size: 1.2rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* КОНТЕНТ */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .section-card:active {
+            transform: scale(0.995);
+        }
+
+        h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.3;
+        }
+
+        h2 i {
+            background: var(--gradient);
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            min-width: 45px;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* СЕРТИФИКАТ */
+        .certificate-container {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .certificate {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .certificate-header h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .certificate-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .certificate-body {
+            position: relative;
+            z-index: 1;
+            padding: 20px 0;
+        }
+
+        .certificate-name {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin: 15px 0;
+            padding: 10px;
+            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .certificate-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .detail-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .detail-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .certificate-grade {
+            font-size: 1.8rem;
+            color: var(--success);
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 10px;
+        }
+
+        .certificate-footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .signature {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 150px;
+            margin-top: 40px;
+        }
+
+        .certificate-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cert-btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        /* СКРЫТЫЙ ЭЛЕМЕНТ ДЛЯ PDF */
+        #pdf-certificate {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 800px;
+            height: 600px;
+            background: white;
+            padding: 40px;
+            color: #333;
+        }
+
+        /* МОБИЛЬНАЯ ОПТИМИЗАЦИЯ */
+        @media (max-width: 575px) {
+            html {
+                font-size: 15px;
+            }
+            
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
+            
+            .section-card {
+                padding: 20px 15px;
+                margin-bottom: 15px;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                padding: 0 5px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            h2 i {
+                min-width: 40px;
+                min-height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .logo-icon {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+                padding: 0 5px;
+            }
+            
+            .grade-tab, .nav-tab {
+                min-height: 55px;
+                padding: 12px;
+                font-size: 0.9rem;
+                border-radius: 12px;
+            }
+            
+            .grade-badge {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+                margin-top: 3px;
+            }
+            
+            .certificate {
+                padding: 20px 15px;
+            }
+            
+            .certificate-header h3 {
+                font-size: 1.8rem;
+            }
+            
+            .certificate-title {
+                font-size: 1.2rem;
+            }
+            
+            .certificate-name {
+                font-size: 1.8rem;
+                padding: 8px;
+            }
+            
+            .certificate-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .detail-item {
+                min-width: 100%;
+            }
+            
+            .certificate-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .certificate-controls {
+                flex-direction: column;
+            }
+            
+            .cert-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            html {
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .logo-icon {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ... (остальной HTML код остаётся без изменений) ... -->
+
+        <!-- СКРЫТЫЙ ЭЛЕМЕНТ ДЛЯ PDF -->
+        <div id="pdf-certificate" style="display: none;">
+            <!-- Здесь будет генерироваться сертификат для PDF -->
+        </div>
+    </div>
+
+    <script>
+        // ... (остальной JavaScript код остаётся) ...
+
+        // ФУНКЦИЯ ДЛЯ ГЕНЕРАЦИИ И СКАЧИВАНИЯ PDF
+        function downloadCertificate() {
+            // Получаем данные сертификата
+            const certificateData = {
+                name: document.getElementById('certificateName').textContent,
+                score: document.getElementById('certScore').textContent,
+                grade: document.getElementById('certGrade').textContent,
+                date: document.getElementById('certDate').textContent,
+                gradeText: document.getElementById('certificateGrade').textContent,
+                gradeColor: document.getElementById('certificateGrade').style.color
+            };
+
+            // Показываем уведомление о генерации
+            showPDFNotification();
+
+            // Создаем HTML для PDF
+            const pdfHTML = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body {
+                            font-family: 'Arial', sans-serif;
+                            margin: 0;
+                            padding: 40px;
+                            background: #f5f5f5;
+                        }
+                        .pdf-certificate {
+                            width: 800px;
+                            height: 600px;
+                            background: white;
+                            padding: 40px;
+                            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                            position: relative;
+                            margin: 0 auto;
+                        }
+                        .pdf-header {
+                            text-align: center;
+                            border-bottom: 3px solid #4361ee;
+                            padding-bottom: 20px;
+                            margin-bottom: 30px;
+                        }
+                        .pdf-header h1 {
+                            color: #4361ee;
+                            font-size: 36px;
+                            margin: 0;
+                        }
+                        .pdf-title {
+                            color: #3a0ca3;
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin: 10px 0;
+                        }
+                        .pdf-body {
+                            text-align: center;
+                        }
+                        .pdf-name {
+                            font-size: 42px;
+                            color: #1a1a2e;
+                            margin: 30px 0;
+                            padding: 20px;
+                            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+                            border-radius: 10px;
+                            font-weight: bold;
+                        }
+                        .pdf-details {
+                            display: flex;
+                            justify-content: space-around;
+                            margin: 30px 0;
+                        }
+                        .pdf-detail {
+                            flex: 1;
+                        }
+                        .pdf-value {
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #4361ee;
+                            display: block;
+                        }
+                        .pdf-label {
+                            font-size: 16px;
+                            color: #666;
+                        }
+                        .pdf-grade {
+                            font-size: 32px;
+                            color: #4cc9f0;
+                            font-weight: bold;
+                            margin: 30px 0;
+                            padding: 15px;
+                            background: rgba(76, 201, 240, 0.1);
+                            border-radius: 10px;
+                        }
+                        .pdf-footer {
+                            margin-top: 40px;
+                            padding-top: 20px;
+                            border-top: 1px solid #ddd;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                        .pdf-signature {
+                            flex: 1;
+                            text-align: center;
+                        }
+                        .pdf-signature-line {
+                            border-top: 1px solid #333;
+                            width: 200px;
+                            margin: 40px auto 10px;
+                        }
+                        .pdf-watermark {
+                            position: absolute;
+                            opacity: 0.1;
+                            font-size: 120px;
+                            transform: rotate(-45deg);
+                            top: 200px;
+                            left: 100px;
+                            color: #4361ee;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="pdf-certificate">
+                        <div class="pdf-watermark">Фишинг.NET</div>
+                        <div class="pdf-header">
+                            <h1>СЕРТИФИКАТ</h1>
+                            <div class="pdf-title">
+                                Об успешном прохождении курса по кибербезопасности
+                            </div>
+                            <p>Выдан ученику/ученице</p>
+                        </div>
+                        <div class="pdf-body">
+                            <div class="pdf-name">${certificateData.name}</div>
+                            
+                            <div class="pdf-details">
+                                <div class="pdf-detail">
+                                    <span class="pdf-value">${certificateData.score}</span>
+                                    <span class="pdf-label">Результат теста</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="pdf-value">${certificateData.grade}</span>
+                                    <span class="pdf-label">Уровень сложности</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="pdf-value">${certificateData.date}</span>
+                                    <span class="pdf-label">Дата выдачи</span>
+                                </div>
+                            </div>
+                            
+                            <div class="pdf-grade" style="color: ${certificateData.gradeColor}">
+                                ${certificateData.gradeText}
+                            </div>
+                            
+                            <p style="margin: 30px 0; font-size: 18px; line-height: 1.6;">
+                                Настоящий сертификат подтверждает, что владелец успешно прошёл обучение 
+                                по программе "Фишинг.NET" и обладает знаниями для безопасной работы в интернете.
+                            </p>
+                            
+                            <div class="pdf-footer">
+                                <div class="pdf-signature">
+                                    <p>Директор проекта</p>
+                                    <div class="pdf-signature-line"></div>
+                                    <p>Фишинг.NET</p>
+                                </div>
+                                <div class="pdf-signature">
+                                    <p>Астраханская область</p>
+                                    <div class="pdf-signature-line"></div>
+                                    <p>Образовательный проект 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            // Создаем временный iframe для генерации PDF
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write(pdfHTML);
+            iframeDoc.close();
+
+            // Ждем загрузки контента
+            setTimeout(() => {
+                html2canvas(iframeDoc.body, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jspdf.jsPDF('l', 'mm', 'a4');
+                    const imgWidth = 297; // A4 width in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                    
+                    // Генерируем имя файла
+                    const fileName = `Сертификат_${certificateData.name.replace(/\s+/g, '_')}_${certificateData.date}.pdf`;
+                    
+                    // Скачиваем PDF
+                    pdf.save(fileName);
+                    
+                    // Удаляем iframe
+                    document.body.removeChild(iframe);
+                    
+                    // Показываем уведомление об успехе
+                    showSuccessNotification();
+                }).catch(error => {
+                    console.error('Ошибка генерации PDF:', error);
+                    showErrorNotification();
+                    document.body.removeChild(iframe);
+                });
+            }, 1000);
+        }
+
+        // ФУНКЦИЯ ДЛЯ ПОКАЗА УВЕДОМЛЕНИЙ
+        function showPDFNotification() {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.id = 'pdf-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--primary);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Генерируем PDF-сертификат...</span>
+            `;
+            
+            document.body.appendChild(notification);
+        }
+
+        function showSuccessNotification() {
+            const notification = document.getElementById('pdf-notification');
+            if (notification) {
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>PDF-сертификат успешно скачан!</span>
+                `;
+                notification.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        function showErrorNotification() {
+            const notification = document.getElementById('pdf-notification');
+            if (notification) {
+                notification.innerHTML = `
+                    <i class="fas fa-times-circle"></i>
+                    <span>Ошибка генерации PDF. Попробуйте ещё раз.</span>
+                `;
+                notification.style.background = 'var(--danger)';
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        // Добавляем CSS для анимаций уведомлений
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ОБРАБОТКА ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+        function setupMobilePDFSupport() {
+            // Для iOS добавляем дополнительную обработку
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                const links = document.querySelectorAll('a[download]');
+                links.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('На iOS скачайте файл через меню браузера');
+                    });
+                });
+            }
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... (остальная инициализация) ...
+            setupMobilePDFSupport();
+        });
+
+        // АЛЬТЕРНАТИВНЫЙ МЕТОД ДЛЯ СТАРЫХ БРАУЗЕРОВ
+        function downloadCertificateFallback() {
+            const certificateData = {
+                name: document.getElementById('certificateName').textContent,
+                score: document.getElementById('certScore').textContent,
+                grade: document.getElementById('certGrade').textContent,
+                date: document.getElementById('certDate').textContent,
+                gradeText: document.getElementById('certificateGrade').textContent
+            };
+
+            // Создаем текстовую версию сертификата
+            const textContent = `
+                СЕРТИФИКАТ
+                
+                Об успешном прохождении курса по кибербезопасности
+                
+                Выдан ученику/ученице:
+                ${certificateData.name}
+                
+                Результат теста: ${certificateData.score}
+                Уровень сложности: ${certificateData.grade}
+                Дата выдачи: ${certificateData.date}
+                Оценка: ${certificateData.gradeText}
+                
+                Настоящий сертификат подтверждает успешное прохождение
+                программы "Фишинг.NET" по кибербезопасности.
+                
+                Директор проекта __________
+                Фишинг.NET
+                
+                Астраханская область __________
+                Образовательный проект 2025
+            `;
+
+            // Создаем blob и скачиваем
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Сертификат_${certificateData.name.replace(/\s+/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
     </script>
 </body>
 </html>
+    </script>
+</body>
+</html>
+
