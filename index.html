@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Фишинг.NET - Астрахань 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем библиотеки для PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root {
             --primary: #4361ee;
@@ -40,6 +43,20 @@
             min-height: 100vh;
             overflow-x: hidden;
             padding: 10px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(103, 58, 183, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(247, 37, 133, 0.1) 0%, transparent 50%);
+            z-index: -1;
         }
 
         .container {
@@ -444,6 +461,16 @@
             overflow: hidden;
         }
 
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
         .game-header {
             text-align: center;
             margin-bottom: 20px;
@@ -718,6 +745,16 @@
             max-width: 600px;
             position: relative;
             overflow: hidden;
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%234361ee" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f72585" stroke-width="1"/></svg>');
         }
 
         .certificate-header {
@@ -999,6 +1036,45 @@
             margin-right: 8px;
             vertical-align: middle;
             border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        /* СТИЛИ ДЛЯ УВЕДОМЛЕНИЙ PDF */
+        .pdf-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
 
         /* МОБИЛЬНАЯ ОПТИМИЗАЦИЯ */
@@ -1311,13 +1387,13 @@
                     <div class="theory-content active" id="theory-1-4">
                         <div class="info-box">
                             <p><strong>Для самых юных пользователей (1-4 классы)</strong></p>
-                            <p>Фишинг — это когда плохие люди в интернете пытаются обманом получить твои секреты.</p>
+                            <p>Фишинг — это когда плохие люди в интернете пытаются обманом получить твои секреты: пароли, имена, адреса.</p>
                         </div>
                         
                         <div class="theory-grid">
                             <div class="theory-card">
                                 <h3><i class="fas fa-fish"></i> Почему "фишинг"?</h3>
-                                <p>Слово происходит от английского "fishing" — рыбалка. Мошенники "забрасывают удочку".</p>
+                                <p>Слово происходит от английского "fishing" — рыбалка. Мошенники "забрасывают удочку" и ждут, когда ты "клюнешь" на их обман.</p>
                             </div>
                             
                             <div class="theory-card">
@@ -1331,7 +1407,7 @@
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-shield-alt"></i> Как защититься?</h3>
-                                <p>1. Всегда спрашивай родителей<br>
+                                <p>1. Всегда спрашивай родителей, если что-то непонятно<br>
                                    2. Не нажимай на подозрительные ссылки<br>
                                    3. Не рассказывай никому свои пароли</p>
                             </div>
@@ -1341,28 +1417,28 @@
                     <div class="theory-content" id="theory-5-9">
                         <div class="info-box">
                             <p><strong>Для средних классов (5-9 классы)</strong></p>
-                            <p>Фишинг — один из самых распространённых видов кибермошенничества.</p>
+                            <p>Фишинг — один из самых распространённых видов кибермошенничества, цель которого — получение доступа к конфиденциальной информации пользователя.</p>
                         </div>
                         
                         <div class="theory-grid">
                             <div class="theory-card">
                                 <h3><i class="fas fa-history"></i> История фишинга</h3>
-                                <p>Первый случай фишинга зафиксирован в 1995 году.</p>
+                                <p>Первый случай фишинга зафиксирован в 1995 году. Мошенники тогда собирали данные кредитных карт от имени AOL. С тех пор методы стали сложнее, но суть осталась прежней.</p>
                             </div>
                             
                             <div class="theory-card">
-                                <h3><i class="fas fa-chart-line"></i> Статистика</h3>
+                                <h3><i class="fas fa-chart-line"></i> Статистика в России</h3>
                                 <p>• 65% школьников сталкивались с фишингом<br>
-                                   • 40% переходили по опасным ссылкам<br>
-                                   • 15% делились личными данными</p>
+                                   • 40% хотя бы раз переходили по опасным ссылкам<br>
+                                   • 15% делились личными данными с незнакомцами</p>
                             </div>
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-cogs"></i> Технические аспекты</h3>
                                 <ul>
-                                    <li>Поддельные домены</li>
-                                    <li>Спам-рассылки</li>
-                                    <li>Социальная инженерия</li>
+                                    <li>Поддельные домены (vk.com vs vk-offis.ru)</li>
+                                    <li>Спам-рассылки с вредоносными вложениями</li>
+                                    <li>Социальная инженерия в соцсетях</li>
                                 </ul>
                             </div>
                         </div>
@@ -1371,7 +1447,7 @@
                     <div class="theory-content" id="theory-10-11">
                         <div class="info-box">
                             <p><strong>Для старших классов (10-11 классы)</strong></p>
-                            <p>Фишинг — сложная система социальной инженерии.</p>
+                            <p>Фишинг — сложная многоуровневая система социальной инженерии, использующая психологические уловки и технические ухищрения для компрометации данных.</p>
                         </div>
                         
                         <div class="theory-grid">
@@ -1382,15 +1458,17 @@
                                     <li><strong>Срочность:</strong> "Аккаунт удалят через 2 часа!"</li>
                                     <li><strong>Авторитет:</strong> Подделка официальных лиц</li>
                                     <li><strong>Любопытство:</strong> "Посмотри, что о тебе пишут"</li>
+                                    <li><strong>Жадность:</strong> "Вы выиграли iPhone!"</li>
                                 </ul>
                             </div>
                             
                             <div class="theory-card">
                                 <h3><i class="fas fa-code"></i> Технические методы</h3>
                                 <ul>
-                                    <li>IDN-омография</li>
-                                    <li>SSL-сертификаты</li>
-                                    <li>Spear phishing</li>
+                                    <li>IDN-омография (использование похожих символов)</li>
+                                    <li>SSL-сертификаты для поддельных сайтов</li>
+                                    <li>Фишинг через мессенджеры и соцсети</li>
+                                    <li>Spear phishing (таргетированный фишинг)</li>
                                 </ul>
                             </div>
                             
@@ -1399,9 +1477,10 @@
                                 <p>В России фишинг преследуется по:</p>
                                 <ul>
                                     <li>Статья 159 УК РФ (Мошенничество)</li>
-                                    <li>Статья 272 УК РФ</li>
-                                    <li>Статья 273 УК РФ</li>
+                                    <li>Статья 272 УК РФ (Несанкционированный доступ)</li>
+                                    <li>Статья 273 УК РФ (Создание вредоносных программ)</li>
                                 </ul>
+                                <p>Наказание: от крупных штрафов до лишения свободы.</p>
                             </div>
                         </div>
                     </div>
@@ -1412,31 +1491,31 @@
                         <div class="rule-card">
                             <div class="rule-number">1</div>
                             <h3>Проверяй адрес сайта</h3>
-                            <p>vk.com (настоящий) vs vk-offis.ru (фишинг)</p>
+                            <p>vk.com (настоящий) vs vk-offis.ru (фишинг) — всегда проверяй домен!</p>
                         </div>
                         
                         <div class="rule-card">
                             <div class="rule-number">2</div>
                             <h3>Осторожно с письмами</h3>
-                            <p>Не переходи по ссылкам из подозрительных писем</p>
+                            <p>Не переходи по ссылкам из подозрительных писем, даже если они от "друга"</p>
                         </div>
                         
                         <div class="rule-card">
                             <div class="rule-number">3</div>
                             <h3>Включи 2FA</h3>
-                            <p>Двухфакторная аутентификация защитит аккаунт</p>
+                            <p>Двухфакторная аутентификация защитит даже если украдут пароль</p>
                         </div>
                         
                         <div class="rule-card">
                             <div class="rule-number">4</div>
                             <h3>Не верь срочности</h3>
-                            <p>«СРОЧНО», «СЕЙЧАС ЖЕ» — признаки фишинга</p>
+                            <p>«СРОЧНО», «СЕЙЧАС ЖЕ», «АККАУНТ УДАЛЯТ» — признаки фишинга</p>
                         </div>
                         
                         <div class="rule-card">
                             <div class="rule-number">5</div>
                             <h3>Расскажи взрослым</h3>
-                            <p>Если что-то подозрительно — сразу к родителям</p>
+                            <p>Если что-то подозрительно — сразу к родителям или учителю</p>
                         </div>
                     </div>
                 </div>
@@ -1470,15 +1549,16 @@
                             <div class="email-simulation">
                                 <div class="email-header">
                                     <p><strong>От:</strong> <span id="emailFrom">Сбербанк Онлайн</span></p>
-                                    <p><strong>Тема:</strong> <span id="emailSubject">Срочное уведомление</span></p>
+                                    <p><strong>Тема:</strong> <span id="emailSubject">Срочное уведомление о блокировке карты</span></p>
                                 </div>
                                 <div id="emailContent">
                                     <p>Уважаемый клиент!</p>
-                                    <p>Наша система обнаружила подозрительные операции.</p>
-                                    <p>Перейдите по ссылке: 
-                                    <a href="#" style="color: #4361ee;">https://sberbank-online-secure.com</a></p>
-                                    <p>Если вы не подтвердите данные, карта будет заблокирована.</p>
-                                    <p>С уважением, Служба безопасности</p>
+                                    <p>Наша система безопасности обнаружила подозрительные операции по вашей карте. 
+                                    Для предотвращения мошенничества необходимо срочно подтвердить данные карты.</p>
+                                    <p>Перейдите по ссылке для подтверждения: 
+                                    <a href="#" style="color: #4361ee;">https://sberbank-online-secure.com/verify</a></p>
+                                    <p>Если вы не подтвердите данные в течение 2 часов, карта будет заблокирована.</p>
+                                    <p>С уважением, Служба безопасности Сбербанка</p>
                                 </div>
                             </div>
                             
@@ -1502,7 +1582,7 @@
                 <div class="quiz-container">
                     <h2><i class="fas fa-brain"></i> Проверь свои знания</h2>
                     <p style="margin-bottom: 20px; color: rgba(255, 255, 255, 0.9); font-size: 1rem;">
-                        <span id="quizInfo">Тест для 1-4 классов (10 вопросов)</span>
+                        <span id="quizInfo">Тест для 1-4 классов (10 простых вопросов)</span>
                     </p>
                     
                     <div class="quiz-progress">
@@ -1570,7 +1650,8 @@
                                 <div class="certificate-grade" id="certificateGrade">Оценка: 5 (Отлично)</div>
                                 
                                 <p style="margin: 20px 0; font-size: 1rem; line-height: 1.5;">
-                                    Настоящий сертификат подтверждает успешное прохождение программы "Фишинг.NET".
+                                    Настоящий сертификат подтверждает, что владелец успешно прошёл обучение 
+                                    по программе "Фишинг.NET" и обладает знаниями для безопасной работы в интернете.
                                 </p>
                                 
                                 <div class="certificate-footer">
@@ -1617,9 +1698,9 @@
                                 <i class="fas fa-times-circle"></i> ОПАСНО: Фишинговая ссылка
                             </div>
                             <div class="example-content">
-                                <p><strong>Письмо:</strong> "Вы выиграли iPhone!"</p>
-                                <p><strong>Ссылка:</strong> apple-gift-free.com</p>
-                                <p><strong>Признаки:</strong> Неожиданный выигрыш</p>
+                                <p><strong>Письмо:</strong> "Вы выиграли iPhone! Перейдите по ссылке для получения"</p>
+                                <p><strong>Ссылка:</strong> apple-gift-free.com (не apple.com)</p>
+                                <p><strong>Признаки:</strong> Неожиданный выигрыш, поддельный домен</p>
                             </div>
                         </div>
                         
@@ -1630,26 +1711,29 @@
                             <div class="example-content">
                                 <p><strong>Письмо:</strong> "Новый вход в ваш аккаунт"</p>
                                 <p><strong>От кого:</strong> no-reply@accounts.google.com</p>
+                                <p><strong>Что делать:</strong> Проверить активность в настройках аккаунта</p>
                             </div>
                         </div>
                         
                         <div class="example-card">
                             <div class="example-header example-bad">
-                                <i class="fas fa-times-circle"></i> ОПАСНО: Поддельная страница
+                                <i class="fas fa-times-circle"></i> ОПАСНО: Поддельная страница входа
                             </div>
                             <div class="example-content">
                                 <p><strong>Сайт:</strong> vkontakte-login.ru</p>
                                 <p><strong>Настоящий:</strong> vk.com</p>
+                                <p><strong>Признаки:</strong> Другой домен, просит ввести пароль</p>
                             </div>
                         </div>
                         
                         <div class="example-card">
                             <div class="example-header example-good">
-                                <i class="fas fa-check-circle"></i> БЕЗОПАСНО: Подтверждение
+                                <i class="fas fa-check-circle"></i> БЕЗОПАСНО: Подтверждение email
                             </div>
                             <div class="example-content">
                                 <p><strong>Письмо:</strong> "Подтвердите ваш email"</p>
-                                <p><strong>Когда:</strong> После регистрации</p>
+                                <p><strong>Когда:</strong> После вашей регистрации на сайте</p>
+                                <p><strong>Признаки:</strong> Ожидаемое действие, правильный отправитель</p>
                             </div>
                         </div>
                     </div>
@@ -1661,7 +1745,7 @@
             <div class="section-card" style="background: rgba(0, 0, 0, 0.2);">
                 <h2><i class="fas fa-share-alt"></i> Поделись знаниями!</h2>
                 <p style="text-align: center; margin-bottom: 20px; font-size: 1rem; line-height: 1.4;">
-                    Расскажи друзьям о фишинге
+                    Расскажи друзьям о фишинге и помоги им не попасться на удочку мошенников
                 </p>
                 
                 <div class="social-links">
@@ -1679,10 +1763,13 @@
                 <div style="margin-top: 25px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px;">
                     <h3><i class="fas fa-map-marker-alt"></i> О проекте</h3>
                     <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.5;">
-                        <strong>Фишинг.NET</strong> — образовательный проект для защиты школьников.
+                        <strong>Фишинг.NET</strong> — образовательный проект, разработанный в Астраханской области 
+                        для защиты школьников от кибермошенников. Проект соответствует государственным программам 
+                        цифровой грамотности и рекомендован для использования в школах региона.
                     </p>
                     <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.7); font-size: 0.85rem; line-height: 1.4;">
-                        © 2025 Фишинг.NET • Астраханская область • Версия 4.0
+                        © 2025 Фишинг.NET — Образовательный проект по кибербезопасности<br>
+                        Астраханская область • Для школьников • Версия 4.0
                     </p>
                 </div>
             </div>
@@ -1690,13 +1777,14 @@
     </div>
 
     <script>
-        // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+        // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
         let currentGrade = '1-4';
         let gameState = {
             score: 0,
             correct: 0,
             level: 1,
-            currentEmail: 0
+            currentEmail: 0,
+            emails: []
         };
 
         let quizState = {
@@ -1714,39 +1802,40 @@
             grade: ""
         };
 
-        // БАЗА ДАННЫХ ДЛЯ ИГРЫ
+        // ========== БАЗА ДАННЫХ ДЛЯ ИГРЫ ==========
         const emailTemplates = {
             '1-4': [
                 {
                     from: "Игровой магазин Roblox",
                     subject: "Ты выиграл бесплатные робуксы!",
                     content: `Привет, друг!<br><br>
-                            Ты выиграл 1000 бесплатных робуксов!<br><br>
+                            Ты только что выиграл 1000 бесплатных робуксов!<br><br>
                             Чтобы получить приз, перейди по ссылке:
                             <a href="#" style="color: #4361ee;">https://roblox-free-robux.com</a><br><br>
-                            Предложение действует только 10 минут!`,
+                            Предложение действует только 10 минут!<br><br>
+                            Твой друг из Roblox`,
                     type: "phishing",
-                    clues: ["Бесплатные робуксы не раздаются", "Другой домен"]
+                    clues: ["Бесплатные робуксы не раздаются", "Другой домен", "Ограниченное время"]
                 },
                 {
                     from: "Майнкрафт Официальный",
                     subject: "Получи бесплатный скин!",
-                    content: `Ура! Ты выиграл эксклюзивный скин.<br><br>
+                    content: `Ура! Ты выиграл эксклюзивный скин для Майнкрафт.<br><br>
                             Скачай его здесь:
                             <a href="#" style="color: #4361ee;">https://minecraft-free-skins.ru</a><br><br>
                             Скин будет доступен только сегодня!`,
                     type: "phishing",
-                    clues: ["Официальный Minecraft не раздаёт скины"]
+                    clues: ["Официальный Minecraft не раздаёт бесплатные скины", "Подозрительный домен"]
                 },
                 {
                     from: "Учитель информатики",
                     subject: "Урок по безопасности",
                     content: `Привет!<br><br>
-                            На следующем уроке будем изучать безопасность.<br><br>
+                            На следующем уроке мы будем изучать безопасность в интернете.<br><br>
                             Подготовься, пожалуйста.<br><br>
                             Твой учитель`,
                     type: "safe",
-                    explanation: "Это обычное письмо от учителя."
+                    explanation: "Это обычное письмо от учителя, без ссылок и требований."
                 }
             ],
             '5-9': [
@@ -1754,39 +1843,88 @@
                     from: "Steam Поддержка",
                     subject: "Ваш аккаунт выиграл приз!",
                     content: `Congratulations!<br><br>
-                            Your Steam account has been selected to receive a free game!<br><br>
+                            Your Steam account has been randomly selected to receive a free game!<br><br>
                             Claim your prize now: 
-                            <a href="#" style="color: #4361ee;">https://steam-gift-community.com</a><br><br>
-                            This offer expires in 3 hours.`,
+                            <a href="#" style="color: #4361ee;">https://steam-gift-community.com/redeem</a><br><br>
+                            This offer expires in 3 hours. Don't miss your chance!<br><br>
+                            Steam Support Team`,
                     type: "phishing",
-                    clues: ["Неожиданный выигрыш", "Другой домен"]
+                    clues: ["Неожиданный выигрыш", "Другой домен", "Ограниченное время"]
                 },
                 {
                     from: "Администрация ВКонтакте",
                     subject: "Срочно: Ваш аккаунт будет удалён!",
                     content: `Уважаемый пользователь!<br><br>
-                            Наша система обнаружила нарушения.<br><br>
-                            Чтобы остановить удаление, перейдите:
+                            Наша система обнаружила нарушения в вашем аккаунте. 
+                            Ваша страница будет удалена через 24 часа.<br><br>
+                            Чтобы остановить удаление, перейдите по ссылке и подтвердите данные:
                             <a href="#" style="color: #4361ee;">https://vk-security-confirm.ru</a><br><br>
-                            Не игнорируйте это сообщение!`,
+                            Не игнорируйте это сообщение!<br><br>
+                            Служба безопасности ВКонтакте`,
                     type: "phishing",
-                    clues: ["Угроза удаления", "Неофициальный домен"]
+                    clues: ["Угроза удаления", "Неофициальный домен", "Создание паники"]
                 },
                 {
                     from: "no-reply@github.com",
                     subject: "New sign-in to your account",
                     content: `Hi there,<br><br>
-                            We noticed a new sign-in to your GitHub account.<br><br>
-                            If this wasn't you, please review security:
+                            We noticed a new sign-in to your GitHub account from:<br>
+                            • Location: Moscow, Russia<br>
+                            • Browser: Chrome on Windows<br>
+                            • Time: Just now<br><br>
+                            If this was you, you can ignore this email.<br>
+                            If this wasn't you, please review your account security:
                             <a href="#" style="color: #4361ee;">https://github.com/settings/security</a><br><br>
-                            Thanks, GitHub Team`,
+                            Thanks,<br>
+                            The GitHub Team`,
                     type: "safe",
-                    explanation: "Стандартное уведомление о безопасности."
+                    explanation: "Это стандартное уведомление о безопасности от GitHub."
+                }
+            ],
+            '10-11': [
+                {
+                    from: "HR Department",
+                    subject: "Job Offer - Immediate Start",
+                    content: `Dear Candidate,<br><br>
+                            We are pleased to offer you a remote position with salary $5000/month.<br><br>
+                            To proceed, we need your passport details and bank information:<br>
+                            <a href="#" style="color: #4361ee;">https://job-fast-hire.com/secure-form</a><br><br>
+                            This offer is valid for 24 hours only.<br><br>
+                            HR Manager`,
+                    type: "phishing",
+                    clues: ["Слишком хорошее предложение", "Требует паспортные данные", "Подозрительный домен"]
+                },
+                {
+                    from: "Tax Service RU",
+                    subject: "Tax Refund Available",
+                    content: `Уважаемый налогоплательщик,<br><br>
+                            Вам положен налоговый вычет в размере 15 000 руб.<br><br>
+                            Для получения заполните форму:
+                            <a href="#" style="color: #4361ee;">https://nalog-refund-service.com</a><br><br>
+                            Требуются данные банковской карты для перевода.<br><br>
+                            ФНС России`,
+                    type: "phishing",
+                    clues: ["ФНС не запрашивает данные карт по email", "Неофициальный домен"]
+                },
+                {
+                    from: "Google Workspace",
+                    subject: "Security alert for your account",
+                    content: `Security Alert<br><br>
+                            A new device signed in to your Google Workspace account.<br><br>
+                            • Device: Windows NT<br>
+                            • Location: Saint Petersburg, Russia<br>
+                            • Time: 2 minutes ago<br><br>
+                            If this was you, you can ignore this alert.<br>
+                            If not, secure your account:
+                            <a href="#" style="color: #4361ee;">https://myaccount.google.com/security</a><br><br>
+                            Google Security Team`,
+                    type: "safe",
+                    explanation: "Официальное уведомление Google о безопасности."
                 }
             ]
         };
 
-        // БАЗА ВОПРОСОВ ДЛЯ ТЕСТА
+        // ========== БАЗА ВОПРОСОВ ДЛЯ ТЕСТА ==========
         const questionBank = {
             '1-4': [
                 {
@@ -1828,14 +1966,74 @@
                         "Нужен ключ"
                     ],
                     correct: 1
+                },
+                {
+                    question: "Можно ли переходить по ссылкам из писем от незнакомцев?",
+                    options: [
+                        "Да, всегда",
+                        "Нет, никогда",
+                        "Только если письмо красивое",
+                        "Только вечером"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что делать, если выиграл iPhone в интернете?",
+                    options: [
+                        "Срочно получить приз",
+                        "Рассказать друзьям",
+                        "Спросить у родителей",
+                        "Удалить письмо"
+                    ],
+                    correct: 2
+                },
+                {
+                    question: "Какой пароль самый безопасный?",
+                    options: [
+                        "123456",
+                        "qwerty",
+                        "Имя и дата рождения",
+                        "Разные буквы и цифры"
+                    ],
+                    correct: 3
+                },
+                {
+                    question: "Кому можно рассказывать свой домашний адрес в интернете?",
+                    options: [
+                        "Всем друзьям",
+                        "Никому",
+                        "Только тем, кто просит",
+                        "Только взрослым из семьи"
+                    ],
+                    correct: 3
+                },
+                {
+                    question: "Что такое двухфакторная аутентификация?",
+                    options: [
+                        "Два пароля",
+                        "Пароль и код из SMS",
+                        "Два аккаунта",
+                        "Два компьютера"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "К кому обращаться, если в интернете что-то напугало?",
+                    options: [
+                        "К другу в соцсети",
+                        "К родителям или учителю",
+                        "Ни к кому",
+                        "К незнакомцу в чате"
+                    ],
+                    correct: 1
                 }
             ],
             '5-9': [
                 {
-                    question: "Как отличить фишинговый сайт?",
+                    question: "Как отличить фишинговый сайт от настоящего?",
                     options: [
                         "По цвету дизайна",
-                        "По HTTPS и правильному домену",
+                        "По наличию HTTPS и правильному домену",
                         "По количеству картинок",
                         "По скорости загрузки"
                     ],
@@ -1852,7 +2050,7 @@
                     correct: 1
                 },
                 {
-                    question: "Какой email отправителя подозрительный?",
+                    question: "Какой email отправителя наиболее подозрительный?",
                     options: [
                         "support@yandex.ru",
                         "no-reply@google.com",
@@ -1862,19 +2060,79 @@
                     correct: 3
                 },
                 {
-                    question: "Что делать при фишинговом письме?",
+                    question: "Что делать при получении фишингового письма?",
                     options: [
                         "Ответить отправителю",
-                        "Перейти по ссылке",
+                        "Перейти по ссылке для проверки",
                         "Пометить как спам и удалить",
                         "Сохранить в архиве"
                     ],
                     correct: 2
+                },
+                {
+                    question: "Какой признак НЕ указывает на фишинг?",
+                    options: [
+                        "Ошибки в тексте письма",
+                        "Официальный логотип компании",
+                        "Требование срочных действий",
+                        "Незнакомый отправитель"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что такое IDN-омография в фишинге?",
+                    options: [
+                        "Использование похожих символов в домене",
+                        "Отправка писем с изображениями",
+                        "Фишинг через мобильные приложения",
+                        "Создание клонов сайтов"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Как защитить аккаунт в соцсетях?",
+                    options: [
+                        "Использовать один пароль везде",
+                        "Включить двухфакторную аутентификацию",
+                        "Доверить пароль другу",
+                        "Ничего не делать"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что такое социальная инженерия?",
+                    options: [
+                        "Изучение общества",
+                        "Манипулирование людьми для получения информации",
+                        "Создание социальных сетей",
+                        "Обучение общению"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Какой закон РФ защищает от кибермошенничества?",
+                    options: [
+                        "Закон об образовании",
+                        "Уголовный кодекс (статья 159)",
+                        "Конституция РФ",
+                        "Закон о рекламе"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что делать, если всё же ввёл данные на фишинговом сайте?",
+                    options: [
+                        "Ничего не делать",
+                        "Срочно сменить пароли",
+                        "Написать мошенникам",
+                        "Удалить аккаунт"
+                    ],
+                    correct: 1
                 }
             ],
             '10-11': [
                 {
-                    question: "Какие психологические приёмы?",
+                    question: "Какие психологические приёмы использует фишинг?",
                     options: [
                         "Только страх и жадность",
                         "Срочность, авторитет, любопытство, жадность",
@@ -1884,7 +2142,7 @@
                     correct: 1
                 },
                 {
-                    question: "Что такое whaling?",
+                    question: "Что такое whaling в контексте фишинга?",
                     options: [
                         "Фишинг на руководящих сотрудников",
                         "Фишинг через мессенджеры",
@@ -1894,9 +2152,9 @@
                     correct: 0
                 },
                 {
-                    question: "Как работают поддельные SSL?",
+                    question: "Как работает фишинг через поддельные SSL-сертификаты?",
                     options: [
-                        "Создаёт безопасные сайты",
+                        "Создаёт полностью безопасные сайты",
                         "Имитирует защищённое соединение",
                         "Шифрует данные жертвы",
                         "Блокирует антивирусы"
@@ -1904,25 +2162,85 @@
                     correct: 1
                 },
                 {
-                    question: "Что такое кейлоггер?",
+                    question: "Что такое кейлоггер в контексте фишинга?",
                     options: [
-                        "Программа для логирования нажатий",
+                        "Программа для логирования нажатий клавиш",
                         "Тип фишингового письма",
                         "Метод социальной инженерии",
                         "Вид шифрования"
                     ],
                     correct: 0
+                },
+                {
+                    question: "Как защитить бизнес от фишинговых атак?",
+                    options: [
+                        "Только антивирусом",
+                        "Обучением сотрудников и техническими мерами",
+                        "Отключением интернета",
+                        "Использованием простых паролей"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что такое DMARC в защите от фишинга?",
+                    options: [
+                        "Протокол аутентификации email",
+                        "Тип фишинговой атаки",
+                        "Метод шифрования",
+                        "Антивирусная программа"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Какова средняя стоимость ущерба от фишинга для компании?",
+                    options: [
+                        "Около 1 млн рублей",
+                        "Около 10 млн рублей",
+                        "Около 100 млн рублей",
+                        "Около 1 млрд рублей"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Что такое zero-day фишинг?",
+                    options: [
+                        "Фишинг в день запуска сайта",
+                        "Использование неизвестных уязвимостей",
+                        "Фишинг только по понедельникам",
+                        "Фишинг с нулевым бюджетом"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Как работают фишинговые кампании через соцсети?",
+                    options: [
+                        "Только через фейковые аккаунты",
+                        "Через рекламу, фейки и взломанные аккаунты",
+                        "Только через мессенджеры",
+                        "Только через комментарии"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Какие перспективы у борьбы с фишингом с использованием ИИ?",
+                    options: [
+                        "ИИ только помогает мошенникам",
+                        "ИИ помогает как защитникам, так и атакующим",
+                        "ИИ неэффективен против фишинга",
+                        "ИИ полностью решит проблему фишинга"
+                    ],
+                    correct: 1
                 }
             ]
         };
 
-        // ИНИЦИАЛИЗАЦИЯ
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
         document.addEventListener('DOMContentLoaded', function() {
             initializeGrade('1-4');
             showSection('basics');
         });
 
-        // ВЫБОР КЛАССА
+        // ========== ВЫБОР КЛАССА ==========
         function selectGrade(grade) {
             currentGrade = grade;
             
@@ -1942,9 +2260,9 @@
                 'Уровень: Продвинутый (10-11 классы)';
             
             document.getElementById('quizInfo').textContent = 
-                grade === '1-4' ? 'Тест для 1-4 классов (10 вопросов)' :
-                grade === '5-9' ? 'Тест для 5-9 классов (10 вопросов)' :
-                'Тест для 10-11 классов (10 вопросов)';
+                grade === '1-4' ? 'Тест для 1-4 классов (10 простых вопросов)' :
+                grade === '5-9' ? 'Тест для 5-9 классов (10 вопросов средней сложности)' :
+                'Тест для 10-11 классов (10 сложных вопросов)';
             
             if (document.getElementById('game').classList.contains('active')) {
                 initializeGame();
@@ -1955,7 +2273,7 @@
             }
         }
 
-        // НАВИГАЦИЯ ПО СЕКЦИЯМ
+        // ========== НАВИГАЦИЯ ПО СЕКЦИЯМ ==========
         function showSection(sectionId) {
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
@@ -1981,7 +2299,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ИГРА: ТРЕНАЖЁР
+        // ========== ИГРА: ТРЕНАЖЁР ==========
         function initializeGame() {
             gameState = {
                 score: 0,
@@ -2026,7 +2344,7 @@
                 feedback.innerHTML = `
                     <h4><i class="fas fa-check-circle"></i> Правильно!</h4>
                     <p>${emailType === 'phishing' ? 
-                        'Это фишинг! ' + template.clues.join(', ') : 
+                        'Это фишинг! Признаки: ' + template.clues.join(', ') : 
                         template.explanation}</p>
                 `;
                 feedback.classList.add('correct', 'show');
@@ -2039,7 +2357,7 @@
                     <h4><i class="fas fa-times-circle"></i> Неправильно!</h4>
                     <p>Это ${emailType === 'phishing' ? 'фишинг' : 'безопасное письмо'}.</p>
                     <p>${emailType === 'phishing' ? 
-                        'Признаки: ' + template.clues.join(', ') : 
+                        'Признаки фишинга: ' + template.clues.join(', ') : 
                         template.explanation}</p>
                 `;
                 feedback.classList.add('incorrect', 'show');
@@ -2062,7 +2380,7 @@
             document.getElementById('level').textContent = gameState.level;
         }
 
-        // ТЕСТИРОВАНИЕ
+        // ========== ТЕСТИРОВАНИЕ ==========
         function initializeQuiz() {
             const questions = questionBank[currentGrade];
             
@@ -2168,18 +2486,18 @@
             
             let message = "";
             if (percentage >= 90) {
-                message = "Отлично! Ты настоящий эксперт!";
+                message = "Отлично! Ты настоящий эксперт по кибербезопасности!";
             } else if (percentage >= 70) {
-                message = "Хорошо! Ты хорошо разбираешься.";
+                message = "Хорошо! Ты хорошо разбираешься в теме.";
             } else if (percentage >= 50) {
                 message = "Неплохо! Основы ты знаешь.";
             } else {
-                message = "Есть над чем поработать!";
+                message = "Есть над чем поработать! Повтори материал выше.";
             }
             
             document.getElementById('finalScore').textContent = `${percentage}%`;
             document.getElementById('resultMessage').textContent = 
-                `${correctAnswers} правильных из ${quizState.totalQuestions}. ${message}`;
+                `${correctAnswers} правильных ответов из ${quizState.totalQuestions}. ${message} Оценка: ${grade.text}`;
             
             document.getElementById('quizArea').style.display = 'none';
             document.querySelector('.quiz-navigation').style.display = 'none';
@@ -2207,9 +2525,9 @@
         }
 
         function getUserData() {
-            const name = prompt("Введите ваше имя и фамилию:", "Иван Иванов");
-            const school = prompt("Введите школу:", "Школа №1 г. Астрахань");
-            const grade = prompt("Введите класс:", "5А");
+            const name = prompt("Введите ваше имя и фамилию для сертификата:", "Иван Иванов");
+            const school = prompt("Введите название вашей школы:", "Школа №1 г. Астрахань");
+            const grade = prompt("Введите ваш класс:", "5А");
             
             if (name && school && grade) {
                 userData = { name, school, grade };
@@ -2217,7 +2535,7 @@
                 document.getElementById('resultScreen').classList.add('hidden');
                 document.getElementById('certificateScreen').classList.remove('hidden');
             } else {
-                alert("Для сертификата нужны данные.");
+                alert("Для получения сертификата необходимо ввести данные.");
             }
         }
 
@@ -2237,15 +2555,215 @@
             document.getElementById('certificateGrade').style.color = grade.color;
         }
 
+        // ========== PDF ГЕНЕРАЦИЯ ==========
         function downloadCertificate() {
-            alert("В реальном приложении генерируется PDF.");
+            // Показываем уведомление о генерации
+            showPDFNotification("Генерируем PDF-сертификат...", "primary");
+            
+            // Создаем временный элемент для PDF
+            const tempDiv = document.createElement('div');
+            tempDiv.style.cssText = `
+                position: fixed;
+                left: -9999px;
+                top: -9999px;
+                width: 800px;
+                height: 600px;
+                background: white;
+                padding: 40px;
+                color: #333;
+                font-family: 'Arial', sans-serif;
+            `;
+            
+            // Получаем данные
+            const certificateData = {
+                name: document.getElementById('certificateName').textContent,
+                score: document.getElementById('certScore').textContent,
+                grade: document.getElementById('certGrade').textContent,
+                date: document.getElementById('certDate').textContent,
+                gradeText: document.getElementById('certificateGrade').textContent,
+                gradeColor: document.getElementById('certificateGrade').style.color || "#4cc9f0"
+            };
+            
+            // Создаем HTML для PDF
+            tempDiv.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    border: 2px solid #4361ee;
+                    padding: 30px;
+                ">
+                    <div style="
+                        position: absolute;
+                        opacity: 0.1;
+                        font-size: 120px;
+                        transform: rotate(-45deg);
+                        top: 200px;
+                        left: 100px;
+                        color: #4361ee;
+                        font-weight: bold;
+                    ">Фишинг.NET</div>
+                    
+                    <div style="text-align: center; border-bottom: 3px solid #4361ee; padding-bottom: 20px; margin-bottom: 30px;">
+                        <h1 style="color: #4361ee; font-size: 36px; margin: 0;">СЕРТИФИКАТ</h1>
+                        <div style="color: #3a0ca3; font-size: 24px; font-weight: bold; margin: 10px 0;">
+                            Об успешном прохождении курса по кибербезопасности
+                        </div>
+                        <p style="font-size: 18px;">Выдан ученику/ученице</p>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="
+                            font-size: 42px;
+                            color: #1a1a2e;
+                            margin: 30px 0;
+                            padding: 20px;
+                            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+                            border-radius: 10px;
+                            font-weight: bold;
+                        ">${certificateData.name}</div>
+                        
+                        <div style="display: flex; justify-content: space-around; margin: 30px 0;">
+                            <div>
+                                <span style="font-size: 24px; font-weight: bold; color: #4361ee; display: block;">${certificateData.score}</span>
+                                <span style="font-size: 16px; color: #666;">Результат теста</span>
+                            </div>
+                            <div>
+                                <span style="font-size: 24px; font-weight: bold; color: #4361ee; display: block;">${certificateData.grade}</span>
+                                <span style="font-size: 16px; color: #666;">Уровень сложности</span>
+                            </div>
+                            <div>
+                                <span style="font-size: 24px; font-weight: bold; color: #4361ee; display: block;">${certificateData.date}</span>
+                                <span style="font-size: 16px; color: #666;">Дата выдачи</span>
+                            </div>
+                        </div>
+                        
+                        <div style="
+                            font-size: 32px;
+                            color: ${certificateData.gradeColor};
+                            font-weight: bold;
+                            margin: 30px 0;
+                            padding: 15px;
+                            background: rgba(76, 201, 240, 0.1);
+                            border-radius: 10px;
+                        ">${certificateData.gradeText}</div>
+                        
+                        <p style="margin: 30px 0; font-size: 18px; line-height: 1.6;">
+                            Настоящий сертификат подтверждает, что владелец успешно прошёл обучение 
+                            по программе "Фишинг.NET" и обладает знаниями для безопасной работы в интернете.
+                        </p>
+                        
+                        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; display: flex; justify-content: space-between;">
+                            <div style="text-align: center; flex: 1;">
+                                <p style="margin: 5px 0;">Директор проекта</p>
+                                <div style="border-top: 1px solid #333; width: 200px; margin: 40px auto 10px;"></div>
+                                <p style="margin: 5px 0;">Фишинг.NET</p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <p style="margin: 5px 0;">Астраханская область</p>
+                                <div style="border-top: 1px solid #333; width: 200px; margin: 40px auto 10px;"></div>
+                                <p style="margin: 5px 0;">Образовательный проект 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(tempDiv);
+            
+            // Используем html2canvas и jsPDF для создания PDF
+            setTimeout(() => {
+                html2canvas(tempDiv, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jspdf.jsPDF('l', 'mm', 'a4');
+                    const imgWidth = 297; // A4 width in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                    
+                    // Генерируем имя файла
+                    const fileName = `Сертификат_Фишинг_${certificateData.name.replace(/\s+/g, '_')}_${certificateData.date}.pdf`;
+                    
+                    // Скачиваем PDF
+                    pdf.save(fileName);
+                    
+                    // Удаляем временный элемент
+                    document.body.removeChild(tempDiv);
+                    
+                    // Показываем успешное уведомление
+                    showPDFNotification("PDF-сертификат успешно скачан!", "success");
+                }).catch(error => {
+                    console.error('Ошибка генерации PDF:', error);
+                    document.body.removeChild(tempDiv);
+                    showPDFNotification("Ошибка генерации PDF. Попробуйте ещё раз.", "error");
+                });
+            }, 500);
+        }
+
+        function showPDFNotification(message, type) {
+            // Удаляем старое уведомление если есть
+            const oldNotification = document.getElementById('pdf-notification');
+            if (oldNotification) {
+                document.body.removeChild(oldNotification);
+            }
+            
+            // Создаем новое уведомление
+            const notification = document.createElement('div');
+            notification.id = 'pdf-notification';
+            notification.className = 'pdf-notification';
+            
+            let icon = '';
+            let bgColor = '';
+            
+            switch(type) {
+                case 'success':
+                    icon = '<i class="fas fa-check-circle"></i>';
+                    bgColor = 'var(--success)';
+                    break;
+                case 'error':
+                    icon = '<i class="fas fa-times-circle"></i>';
+                    bgColor = 'var(--danger)';
+                    break;
+                default:
+                    icon = '<i class="fas fa-spinner fa-spin"></i>';
+                    bgColor = 'var(--primary)';
+            }
+            
+            notification.innerHTML = `${icon}<span>${message}</span>`;
+            notification.style.background = bgColor;
+            
+            document.body.appendChild(notification);
+            
+            // Автоматически скрываем через 3 секунды (кроме сообщений об ошибке)
+            if (type !== 'error') {
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOut 0.3s ease-in';
+                        setTimeout(() => {
+                            if (notification.parentNode) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 300);
+                    }
+                }, 3000);
+            }
         }
 
         function shareCertificate() {
             if (navigator.share) {
+                const certificateData = {
+                    name: document.getElementById('certificateName').textContent,
+                    score: document.getElementById('certScore').textContent
+                };
+                
                 navigator.share({
-                    title: `Мой сертификат: ${quizState.testResult.percentage}%`,
-                    text: `Я прошёл тест по кибербезопасности!`,
+                    title: `Мой сертификат по кибербезопасности: ${certificateData.score}`,
+                    text: `Я прошёл тест по кибербезопасности на ${certificateData.score}! Присоединяйся к проекту Фишинг.NET!`,
                     url: window.location.href
                 });
             } else {
@@ -2261,6 +2779,7 @@
             window.print();
             document.body.innerHTML = originalContent;
             
+            // Восстанавливаем состояние
             document.getElementById('certificateScreen').classList.remove('hidden');
         }
 
@@ -2271,12 +2790,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
+        // ========== ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ==========
         function shareSite() {
             if (navigator.share) {
                 navigator.share({
                     title: 'Фишинг.NET - Безопасность в интернете',
-                    text: 'Научись распознавать фишинг!',
+                    text: 'Научись распознавать фишинг и защити свои данные! Проект из Астраханской области.',
                     url: window.location.href
                 });
             } else {
@@ -2286,974 +2805,40 @@
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                alert('Ссылка скопирована!');
+                showPDFNotification('Ссылка скопирована! Поделись ею с друзьями.', 'success');
+            }).catch(() => {
+                showPDFNotification('Не удалось скопировать ссылку', 'error');
             });
         }
 
         function printPage() {
             window.print();
         }
-        <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Фишинг.NET - Астрахань 2025</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Подключаем библиотеку для генерации PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #f72585;
-            --success: #4cc9f0;
-            --warning: #ffba08;
-            --danger: #e63946;
-            --light: #f8f9fa;
-            --dark: #1a1a2e;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --grade-1-4: #4CAF50;
-            --grade-5-9: #2196F3;
-            --grade-10-11: #FF9800;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            font-size: 16px;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            color: white;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 10px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-            width: 100%;
-        }
-
-        /* HEADER */
-        header {
-            padding: 20px 0 10px;
-            position: relative;
-        }
-
-        .logo-area {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .logo-animation {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .logo-icon {
-            font-size: 3rem;
-            color: white;
-            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
-        }
-
-        .logo-icon:nth-child(1) { color: var(--primary); animation: pulse 2s infinite; }
-        .logo-icon:nth-child(2) { color: var(--accent); animation: pulse 2s infinite 0.5s; }
-        .logo-icon:nth-child(3) { color: var(--success); animation: pulse 2s infinite 1s; }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(to right, var(--primary), var(--accent), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            font-weight: 800;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-            line-height: 1.2;
-            padding: 0 10px;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 100%;
-            margin: 0 auto 15px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            padding: 0 10px;
-            line-height: 1.4;
-        }
-
-        .astrakhan-badge {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, #1c3c7a, #d52b1e);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 0.95rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* КЛАССЫ */
-        .grade-selector {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-            width: 100%;
-        }
-
-        @media (min-width: 576px) {
-            .grade-selector {
-                flex-direction: row;
-            }
-        }
-
-        .grade-tab {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 14px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            flex: 1;
-            min-height: 60px;
-            text-align: center;
-        }
-
-        .grade-tab.active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .grade-tab-1-4.active { background: var(--grade-1-4); }
-        .grade-tab-5-9.active { background: var(--grade-5-9); }
-        .grade-tab-10-11.active { background: var(--grade-10-11); }
-
-        .grade-badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 5px;
-        }
-
-        .badge-1-4 { background: var(--grade-1-4); }
-        .badge-5-9 { background: var(--grade-5-9); }
-        .badge-10-11 { background: var(--grade-10-11); }
-
-        /* НАВИГАЦИЯ */
-        .main-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-            width: 100%;
-        }
-
-        @media (min-width: 576px) {
-            .main-nav {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-        }
-
-        .nav-tab {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 14px 20px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1rem;
-            width: 100%;
-            min-height: 60px;
-        }
-
-        @media (min-width: 576px) {
-            .nav-tab {
-                flex: 1;
-                min-width: 160px;
-            }
-        }
-
-        .nav-tab:active {
-            transform: scale(0.98);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .nav-tab.active {
-            background: var(--primary);
-            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
-        }
-
-        .nav-tab i {
-            font-size: 1.2rem;
-            min-width: 24px;
-            text-align: center;
-        }
-
-        /* КОНТЕНТ */
-        .content-section {
-            display: none;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 25px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .section-card:active {
-            transform: scale(0.995);
-        }
-
-        h2 {
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            line-height: 1.3;
-        }
-
-        h2 i {
-            background: var(--gradient);
-            padding: 12px;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            min-width: 45px;
-            min-height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* СЕРТИФИКАТ */
-        .certificate-container {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-            border-radius: 20px;
-            margin: 20px 0;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .certificate {
-            background: white;
-            color: #333;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin: 20px auto;
-            max-width: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .certificate-header {
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 20px;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .certificate-header h3 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .certificate-title {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .certificate-body {
-            position: relative;
-            z-index: 1;
-            padding: 20px 0;
-        }
-
-        .certificate-name {
-            font-size: 2.2rem;
-            color: var(--dark);
-            margin: 15px 0;
-            padding: 10px;
-            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .certificate-details {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .detail-item {
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .detail-value {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary);
-            display: block;
-        }
-
-        .detail-label {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .certificate-grade {
-            font-size: 1.8rem;
-            color: var(--success);
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 10px;
-            background: rgba(76, 201, 240, 0.1);
-            border-radius: 10px;
-        }
-
-        .certificate-footer {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .signature {
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .signature-line {
-            border-top: 1px solid #333;
-            width: 150px;
-            margin-top: 40px;
-        }
-
-        .certificate-controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .cert-btn {
-            padding: 12px 25px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        /* СКРЫТЫЙ ЭЛЕМЕНТ ДЛЯ PDF */
-        #pdf-certificate {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            width: 800px;
-            height: 600px;
-            background: white;
-            padding: 40px;
-            color: #333;
-        }
-
-        /* МОБИЛЬНАЯ ОПТИМИЗАЦИЯ */
-        @media (max-width: 575px) {
-            html {
-                font-size: 15px;
-            }
-            
-            body {
-                padding: 8px;
-            }
-            
-            .container {
-                padding: 0 10px;
-            }
-            
-            .section-card {
-                padding: 20px 15px;
-                margin-bottom: 15px;
-                border-radius: 16px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-                padding: 0 5px;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            h2 i {
-                min-width: 40px;
-                min-height: 40px;
-                font-size: 1.1rem;
-            }
-            
-            .logo-icon {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-                padding: 0 5px;
-            }
-            
-            .grade-tab, .nav-tab {
-                min-height: 55px;
-                padding: 12px;
-                font-size: 0.9rem;
-                border-radius: 12px;
-            }
-            
-            .grade-badge {
-                font-size: 0.7rem;
-                padding: 2px 8px;
-                margin-top: 3px;
-            }
-            
-            .certificate {
-                padding: 20px 15px;
-            }
-            
-            .certificate-header h3 {
-                font-size: 1.8rem;
-            }
-            
-            .certificate-title {
-                font-size: 1.2rem;
-            }
-            
-            .certificate-name {
-                font-size: 1.8rem;
-                padding: 8px;
-            }
-            
-            .certificate-details {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .detail-item {
-                min-width: 100%;
-            }
-            
-            .certificate-footer {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .certificate-controls {
-                flex-direction: column;
-            }
-            
-            .cert-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 360px) {
-            html {
-                font-size: 14px;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            h2 {
-                font-size: 1.4rem;
-            }
-            
-            .logo-icon {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- ... (остальной HTML код остаётся без изменений) ... -->
-
-        <!-- СКРЫТЫЙ ЭЛЕМЕНТ ДЛЯ PDF -->
-        <div id="pdf-certificate" style="display: none;">
-            <!-- Здесь будет генерироваться сертификат для PDF -->
-        </div>
-    </div>
-
-    <script>
-        // ... (остальной JavaScript код остаётся) ...
-
-        // ФУНКЦИЯ ДЛЯ ГЕНЕРАЦИИ И СКАЧИВАНИЯ PDF
-        function downloadCertificate() {
-            // Получаем данные сертификата
-            const certificateData = {
-                name: document.getElementById('certificateName').textContent,
-                score: document.getElementById('certScore').textContent,
-                grade: document.getElementById('certGrade').textContent,
-                date: document.getElementById('certDate').textContent,
-                gradeText: document.getElementById('certificateGrade').textContent,
-                gradeColor: document.getElementById('certificateGrade').style.color
-            };
-
-            // Показываем уведомление о генерации
-            showPDFNotification();
-
-            // Создаем HTML для PDF
-            const pdfHTML = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <style>
-                        body {
-                            font-family: 'Arial', sans-serif;
-                            margin: 0;
-                            padding: 40px;
-                            background: #f5f5f5;
-                        }
-                        .pdf-certificate {
-                            width: 800px;
-                            height: 600px;
-                            background: white;
-                            padding: 40px;
-                            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-                            position: relative;
-                            margin: 0 auto;
-                        }
-                        .pdf-header {
-                            text-align: center;
-                            border-bottom: 3px solid #4361ee;
-                            padding-bottom: 20px;
-                            margin-bottom: 30px;
-                        }
-                        .pdf-header h1 {
-                            color: #4361ee;
-                            font-size: 36px;
-                            margin: 0;
-                        }
-                        .pdf-title {
-                            color: #3a0ca3;
-                            font-size: 24px;
-                            font-weight: bold;
-                            margin: 10px 0;
-                        }
-                        .pdf-body {
-                            text-align: center;
-                        }
-                        .pdf-name {
-                            font-size: 42px;
-                            color: #1a1a2e;
-                            margin: 30px 0;
-                            padding: 20px;
-                            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
-                            border-radius: 10px;
-                            font-weight: bold;
-                        }
-                        .pdf-details {
-                            display: flex;
-                            justify-content: space-around;
-                            margin: 30px 0;
-                        }
-                        .pdf-detail {
-                            flex: 1;
-                        }
-                        .pdf-value {
-                            font-size: 24px;
-                            font-weight: bold;
-                            color: #4361ee;
-                            display: block;
-                        }
-                        .pdf-label {
-                            font-size: 16px;
-                            color: #666;
-                        }
-                        .pdf-grade {
-                            font-size: 32px;
-                            color: #4cc9f0;
-                            font-weight: bold;
-                            margin: 30px 0;
-                            padding: 15px;
-                            background: rgba(76, 201, 240, 0.1);
-                            border-radius: 10px;
-                        }
-                        .pdf-footer {
-                            margin-top: 40px;
-                            padding-top: 20px;
-                            border-top: 1px solid #ddd;
-                            display: flex;
-                            justify-content: space-between;
-                        }
-                        .pdf-signature {
-                            flex: 1;
-                            text-align: center;
-                        }
-                        .pdf-signature-line {
-                            border-top: 1px solid #333;
-                            width: 200px;
-                            margin: 40px auto 10px;
-                        }
-                        .pdf-watermark {
-                            position: absolute;
-                            opacity: 0.1;
-                            font-size: 120px;
-                            transform: rotate(-45deg);
-                            top: 200px;
-                            left: 100px;
-                            color: #4361ee;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="pdf-certificate">
-                        <div class="pdf-watermark">Фишинг.NET</div>
-                        <div class="pdf-header">
-                            <h1>СЕРТИФИКАТ</h1>
-                            <div class="pdf-title">
-                                Об успешном прохождении курса по кибербезопасности
-                            </div>
-                            <p>Выдан ученику/ученице</p>
-                        </div>
-                        <div class="pdf-body">
-                            <div class="pdf-name">${certificateData.name}</div>
-                            
-                            <div class="pdf-details">
-                                <div class="pdf-detail">
-                                    <span class="pdf-value">${certificateData.score}</span>
-                                    <span class="pdf-label">Результат теста</span>
-                                </div>
-                                <div class="pdf-detail">
-                                    <span class="pdf-value">${certificateData.grade}</span>
-                                    <span class="pdf-label">Уровень сложности</span>
-                                </div>
-                                <div class="pdf-detail">
-                                    <span class="pdf-value">${certificateData.date}</span>
-                                    <span class="pdf-label">Дата выдачи</span>
-                                </div>
-                            </div>
-                            
-                            <div class="pdf-grade" style="color: ${certificateData.gradeColor}">
-                                ${certificateData.gradeText}
-                            </div>
-                            
-                            <p style="margin: 30px 0; font-size: 18px; line-height: 1.6;">
-                                Настоящий сертификат подтверждает, что владелец успешно прошёл обучение 
-                                по программе "Фишинг.NET" и обладает знаниями для безопасной работы в интернете.
-                            </p>
-                            
-                            <div class="pdf-footer">
-                                <div class="pdf-signature">
-                                    <p>Директор проекта</p>
-                                    <div class="pdf-signature-line"></div>
-                                    <p>Фишинг.NET</p>
-                                </div>
-                                <div class="pdf-signature">
-                                    <p>Астраханская область</p>
-                                    <div class="pdf-signature-line"></div>
-                                    <p>Образовательный проект 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `;
-
-            // Создаем временный iframe для генерации PDF
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            iframeDoc.open();
-            iframeDoc.write(pdfHTML);
-            iframeDoc.close();
-
-            // Ждем загрузки контента
-            setTimeout(() => {
-                html2canvas(iframeDoc.body, {
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    allowTaint: true
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jspdf.jsPDF('l', 'mm', 'a4');
-                    const imgWidth = 297; // A4 width in mm
-                    const imgHeight = canvas.height * imgWidth / canvas.width;
-                    
-                    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                    
-                    // Генерируем имя файла
-                    const fileName = `Сертификат_${certificateData.name.replace(/\s+/g, '_')}_${certificateData.date}.pdf`;
-                    
-                    // Скачиваем PDF
-                    pdf.save(fileName);
-                    
-                    // Удаляем iframe
-                    document.body.removeChild(iframe);
-                    
-                    // Показываем уведомление об успехе
-                    showSuccessNotification();
-                }).catch(error => {
-                    console.error('Ошибка генерации PDF:', error);
-                    showErrorNotification();
-                    document.body.removeChild(iframe);
-                });
-            }, 1000);
-        }
-
-        // ФУНКЦИЯ ДЛЯ ПОКАЗА УВЕДОМЛЕНИЙ
-        function showPDFNotification() {
-            // Создаем уведомление
-            const notification = document.createElement('div');
-            notification.id = 'pdf-notification';
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--primary);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                animation: slideIn 0.3s ease-out;
-            `;
-            
-            notification.innerHTML = `
-                <i class="fas fa-spinner fa-spin"></i>
-                <span>Генерируем PDF-сертификат...</span>
-            `;
-            
-            document.body.appendChild(notification);
-        }
-
-        function showSuccessNotification() {
-            const notification = document.getElementById('pdf-notification');
-            if (notification) {
-                notification.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <span>PDF-сертификат успешно скачан!</span>
-                `;
-                notification.style.background = 'var(--success)';
-                
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-in';
-                    setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-        }
-
-        function showErrorNotification() {
-            const notification = document.getElementById('pdf-notification');
-            if (notification) {
-                notification.innerHTML = `
-                    <i class="fas fa-times-circle"></i>
-                    <span>Ошибка генерации PDF. Попробуйте ещё раз.</span>
-                `;
-                notification.style.background = 'var(--danger)';
-                
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-in';
-                    setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-        }
-
-        // Добавляем CSS для анимаций уведомлений
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
+        // ========== ОБРАБОТКА КЛАВИАТУРЫ ==========
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+                e.preventDefault();
+                const nextBtn = document.getElementById('nextBtn');
+                if (nextBtn && !nextBtn.disabled) {
+                    nextBtn.click();
                 }
             }
             
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
+            if (e.code === 'ArrowRight') {
+                const nextBtn = document.getElementById('nextBtn');
+                if (nextBtn && !nextBtn.disabled) {
+                    nextBtn.click();
                 }
             }
-        `;
-        document.head.appendChild(style);
-
-        // ОБРАБОТКА ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-        function setupMobilePDFSupport() {
-            // Для iOS добавляем дополнительную обработку
-            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                const links = document.querySelectorAll('a[download]');
-                links.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        alert('На iOS скачайте файл через меню браузера');
-                    });
-                });
+            
+            if (e.code === 'ArrowLeft') {
+                const prevBtn = document.getElementById('prevBtn');
+                if (prevBtn && !prevBtn.disabled) {
+                    prevBtn.click();
+                }
             }
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
-        document.addEventListener('DOMContentLoaded', function() {
-            // ... (остальная инициализация) ...
-            setupMobilePDFSupport();
         });
-
-        // АЛЬТЕРНАТИВНЫЙ МЕТОД ДЛЯ СТАРЫХ БРАУЗЕРОВ
-        function downloadCertificateFallback() {
-            const certificateData = {
-                name: document.getElementById('certificateName').textContent,
-                score: document.getElementById('certScore').textContent,
-                grade: document.getElementById('certGrade').textContent,
-                date: document.getElementById('certDate').textContent,
-                gradeText: document.getElementById('certificateGrade').textContent
-            };
-
-            // Создаем текстовую версию сертификата
-            const textContent = `
-                СЕРТИФИКАТ
-                
-                Об успешном прохождении курса по кибербезопасности
-                
-                Выдан ученику/ученице:
-                ${certificateData.name}
-                
-                Результат теста: ${certificateData.score}
-                Уровень сложности: ${certificateData.grade}
-                Дата выдачи: ${certificateData.date}
-                Оценка: ${certificateData.gradeText}
-                
-                Настоящий сертификат подтверждает успешное прохождение
-                программы "Фишинг.NET" по кибербезопасности.
-                
-                Директор проекта __________
-                Фишинг.NET
-                
-                Астраханская область __________
-                Образовательный проект 2025
-            `;
-
-            // Создаем blob и скачиваем
-            const blob = new Blob([textContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Сертификат_${certificateData.name.replace(/\s+/g, '_')}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
     </script>
 </body>
 </html>
-    </script>
-</body>
-</html>
-
