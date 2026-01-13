@@ -2430,3 +2430,454 @@
     </script>
 </body>
 </html>
+
+/* ========== ОПТИМИЗАЦИЯ ДЛЯ ТЕЛЕФОНОВ ========== */
+
+/* 1. Улучшение для маленьких экранов */
+@media (max-width: 575px) {
+    html {
+        font-size: 15px;
+    }
+    
+    body {
+        padding: 8px;
+        -webkit-text-size-adjust: none; /* Предотвращает авто-масштабирование текста */
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Уменьшаем отступы в карточках */
+    .section-card {
+        padding: 20px 15px;
+        margin-bottom: 15px;
+        border-radius: 16px;
+    }
+    
+    /* Заголовки */
+    h1 {
+        font-size: 1.8rem;
+        padding: 0 5px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    h2 i {
+        min-width: 40px;
+        min-height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    /* Логотип */
+    .logo-icon {
+        font-size: 2.5rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+        padding: 0 5px;
+    }
+    
+    /* Классы и навигация */
+    .grade-tab, .nav-tab {
+        min-height: 55px;
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+    }
+    
+    .grade-badge {
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        margin-top: 3px;
+    }
+    
+    /* Теория */
+    .theory-card {
+        padding: 20px;
+    }
+    
+    .theory-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Игра */
+    .game-container {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+    
+    .game-stats {
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-item:last-child {
+        border-bottom: none;
+    }
+    
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    
+    .game-area {
+        min-height: 300px;
+        padding: 15px;
+    }
+    
+    .email-simulation {
+        padding: 15px;
+        max-height: 250px;
+    }
+    
+    .game-controls {
+        margin-top: 15px;
+    }
+    
+    .game-btn {
+        padding: 14px;
+        font-size: 1rem;
+        min-height: 55px;
+    }
+    
+    /* Тест */
+    .quiz-container {
+        padding: 20px 15px;
+    }
+    
+    .quiz-question-card {
+        padding: 15px;
+    }
+    
+    .question-text {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .quiz-option {
+        padding: 14px 12px;
+        min-height: 55px;
+        font-size: 0.95rem;
+    }
+    
+    .nav-btn {
+        padding: 12px 15px;
+        min-height: 50px;
+        min-width: 100px;
+    }
+    
+    .quiz-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .quiz-navigation > div {
+        order: -1;
+    }
+    
+    /* Сертификат */
+    .certificate {
+        padding: 20px 15px;
+    }
+    
+    .certificate-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .certificate-title {
+        font-size: 1.2rem;
+    }
+    
+    .certificate-name {
+        font-size: 1.8rem;
+        padding: 8px;
+    }
+    
+    .certificate-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .detail-item {
+        min-width: 100%;
+    }
+    
+    .certificate-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .certificate-controls {
+        flex-direction: column;
+    }
+    
+    .cert-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Примеры */
+    .example-header {
+        padding: 15px;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .example-content {
+        padding: 15px;
+    }
+    
+    /* Футер */
+    footer {
+        margin-top: 30px;
+        padding: 20px 0;
+    }
+    
+    /* Адаптивные кнопки для очень маленьких экранов */
+    @media (max-width: 340px) {
+        .grade-tab, .nav-tab {
+            font-size: 0.85rem;
+            padding: 10px;
+        }
+        
+        .game-btn {
+            font-size: 0.9rem;
+            padding: 12px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+    }
+}
+
+/* 2. Улучшение тач-интерфейса */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем зону клика для всех интерактивных элементов */
+    .grade-tab, 
+    .nav-tab, 
+    .game-btn, 
+    .nav-btn, 
+    .cert-btn,
+    .quiz-option,
+    .rule-card,
+    .example-card,
+    .social-icon {
+        min-height: 44px; /* Минимальный размер для удобного тапа (Apple рекомендация) */
+    }
+    
+    /* Увеличиваем отступы в интерактивных элементах */
+    .game-controls,
+    .quiz-navigation,
+    .certificate-controls {
+        gap: 15px;
+    }
+    
+    /* Убираем hover-эффекты, так как на тач-устройствах они некорректны */
+    .theory-card:hover,
+    .rule-card:hover,
+    .example-card:hover {
+        transform: none;
+    }
+    
+    /* Улучшаем визуальную обратную связь при нажатии */
+    .grade-tab:active,
+    .nav-tab:active,
+    .game-btn:active,
+    .nav-btn:active,
+    .cert-btn:active,
+    .quiz-option:active,
+    .rule-card:active,
+    .example-card:active,
+    .social-icon:active {
+        transform: scale(0.96);
+        transition: transform 0.1s;
+    }
+}
+
+/* 3. Предотвращение зума при фокусе на инпутах (если понадобятся) */
+@media (max-width: 575px) {
+    input, select, textarea {
+        font-size: 16px; /* Предотвращает зум в iOS */
+    }
+}
+
+/* 4. Оптимизация скролла на iOS */
+.rule-grid,
+.examples-grid,
+.theory-grid,
+.email-simulation {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 5. Улучшение читаемости на маленьких экранах */
+@media (max-width: 575px) {
+    .theory-card p,
+    .rule-card p,
+    .example-content p,
+    .info-box p,
+    .warning-box p {
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+    
+    /* Улучшение отображения списков */
+    .theory-card ul {
+        padding-left: 18px;
+    }
+    
+    .theory-card li {
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+    }
+}
+
+/* 6. Адаптивная типографика для очень маленьких экранов */
+@media (max-width: 360px) {
+    html {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-icon {
+        font-size: 2.2rem;
+    }
+}
+
+/* 7. Безопасные зоны для iPhone X и новее */
+@supports (padding: max(0px)) {
+    body, .container {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+    }
+    
+    footer {
+        padding-bottom: max(25px, env(safe-area-inset-bottom));
+    }
+}
+
+/* 8. Улучшение производительности на мобильных */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 9. Оптимизация анимаций для мобильных */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 10. Улучшение отображения на портретной ориентации */
+@media (orientation: portrait) {
+    .game-container,
+    .quiz-container,
+    .certificate-container {
+        margin: 15px 0;
+    }
+    
+    .section-card {
+        margin-bottom: 15px;
+    }
+}
+
+/* 11. Адаптация для очень высоких экранов (современные смартфоны) */
+@media (min-height: 800px) and (max-width: 575px) {
+    .game-area {
+        min-height: 350px;
+    }
+    
+    .email-simulation {
+        max-height: 300px;
+    }
+}
+
+/* 12. Улучшение для темной темы на мобильных */
+@media (prefers-color-scheme: dark) {
+    .email-simulation {
+        background: #111;
+        color: #fff;
+        border-color: #333;
+    }
+    
+    .email-header {
+        border-color: #333;
+    }
+}
+
+/* 13. Улучшение отображения всплывающих окон (alert/prompt) на мобильных */
+@media (max-width: 575px) {
+    /* Стили для всплывающих окон JavaScript */
+    .modal-mobile-optimized {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.9);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .modal-content {
+        background: var(--dark);
+        border-radius: 20px;
+        padding: 25px;
+        width: 100%;
+        max-width: 400px;
+        border: 2px solid var(--primary);
+    }
+}
+
+/* 14. Улучшение навигации для одной руки (большие экраны) */
+@media (min-width: 375px) and (max-width: 575px) {
+    .main-nav {
+        padding: 0 5px;
+    }
+    
+    .game-controls {
+        padding: 0 5px;
+    }
+}
+
+/* 15. Адаптация футера для мобильных */
+@media (max-width: 575px) {
+    footer .section-card {
+        padding: 20px;
+    }
+    
+    .social-links {
+        gap: 12px;
+    }
+}
